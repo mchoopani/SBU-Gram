@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="stackpane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="408.0" minWidth="716.0" prefHeight="408.0" prefWidth="716.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
+    <AnchorPane>
+
+        <JFXTextField fx:id="usernameTF" focusColor="WHITE" layoutX="-176.0" layoutY="-107.0" prefHeight="26.0" prefWidth="350.0" promptText="UserName" style="-fx-text-inner-color: White;" translateX="200" translateY="200" unFocusColor="#e91e63">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </JFXTextField>
+        <JFXPasswordField fx:id="passwordTF" focusColor="WHITE" layoutX="24.0" layoutY="195.0" prefHeight="26.0" prefWidth="350.0" promptText="Password" style="-fx-text-inner-color: white;" unFocusColor="#e91e63">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </JFXPasswordField>
+        <JFXButton fx:id="btnLogin" layoutX="160.0" layoutY="262.0" onAction="#loginBtnClicked" prefHeight="38.0" prefWidth="77.0" ripplerFill="WHITE" style="-fx-background-color: #e91e63;" text="Login" textFill="WHITE">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </JFXButton>
+        <ImageView fitHeight="273.0" fitWidth="273.0" layoutX="435.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icon.png" />
+            </image>
+        </ImageView>
+        <JFXButton layoutX="24.0" layoutY="335.0" prefHeight="38.0" prefWidth="154.0" ripplerFill="WHITE" style="-fx-background-color: #e91e63;" text="Forget Password" textFill="WHITE">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXButton>
+        <JFXButton layoutX="219.0" layoutY="335.0" onAction="#goToSignup" prefHeight="38.0" prefWidth="154.0" ripplerFill="WHITE" style="-fx-background-color: #e91e63;" text="Create New Account" textFill="WHITE">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXButton>
+        <Label layoutX="187.0" layoutY="301.0" text="or" textFill="WHITE">
+            <font>
+                <Font size="26.0" />
+            </font>
+        </Label>
+    </AnchorPane>
+</StackPane>
