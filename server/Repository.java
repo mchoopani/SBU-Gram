@@ -6,11 +6,13 @@ import Model.User;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Vector;
 import java.util.stream.Collectors;
 
 public class Repository {
-    private static ArrayList<Post> posts = new ArrayList<>();
-    private static ArrayList<User> users = new ArrayList<>();
+//    private static ArrayList<Post> posts = new ArrayList<>();
+    private static Vector<Post> posts = new Vector<>();
+    private static Vector<User> users = new Vector<>();
 
     public static void addPost(Post post) {
         posts.add(post);
@@ -34,7 +36,7 @@ public class Repository {
         }
         return false;
     }
-    public static <T> boolean exists(ArrayList<T> arr, T t){
+    public static <T> boolean exists(Vector<T> arr, T t){
         for (T u : arr)
             if (t.equals(u))
                 return true;
@@ -47,6 +49,6 @@ public class Repository {
         return exists(posts,thisPost);
     }
     public static ArrayList<User> getUsers() {
-        return users;
+        return new ArrayList<>(users);
     }
 }
