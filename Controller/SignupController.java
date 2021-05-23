@@ -23,6 +23,14 @@ public class SignupController {
     public JFXPasswordField txt_pass1;
     public JFXPasswordField txt_pass2;
     public ImageView img_profile;
+    public JFXTextField txt_year;
+    public JFXTextField txt_month;
+    public JFXTextField txt_day;
+    public JFXTextField txt_recovery;
+    public JFXTextField txt_country;
+    public JFXTextField txt_city;
+    public JFXTextField txt_job;
+
 
     byte[] image;
     String fileName;
@@ -49,7 +57,10 @@ public class SignupController {
                 ||
                 txt_pass2.getText().length() == 0
                 ||
-                txt_username.getText().length() == 0) {
+                txt_username.getText().length() == 0
+                ||
+                txt_recovery.getText().length() == 0
+        ) {
             new MyDialog(sign_sp,"#f50057")
                     .setTitle("Error!","#e5c07b")
                     .setMessage("one or more field is null"
@@ -67,7 +78,11 @@ public class SignupController {
                     .show();
         }
         else {
-            SignupModel.signup(new User(txt_username.getText(),txt_name.getText(),txt_pass1.getText()),sign_sp,fileName,image);
+            User user = new User(txt_username.getText(),txt_name.getText(),txt_pass1.getText(),txt_recovery.getText());
+            user.setAddress(txt_country.getText(),txt_city.getText());
+            user.setJob(txt_job.getText());
+            user.setBirthday(txt_year.getText(),txt_month.getText(),txt_day.getText());
+            SignupModel.signup(user,sign_sp,fileName,image);
         }
     }
 

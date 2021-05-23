@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="stackpane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="408.0"
+           minWidth="716.0" prefHeight="408.0" prefWidth="716.0" style="-fx-background-color: #282C34;"
+           xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="Controller.ForgetController">
+
+    <AnchorPane>
+        <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="6.0" layoutY="7.0" onMouseClicked="#back"
+                   pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/back.png"/>
+            </image>
+        </ImageView>
+        <JFXTextField fx:id="txt_username" focusColor="WHITE" layoutX="-17.0" layoutY="-112.0" prefHeight="26.0"
+                      prefWidth="350.0" promptText="UserName" style="-fx-text-inner-color: White;" translateX="200"
+                      translateY="200" unFocusColor="#e91e63">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </JFXTextField>
+
+        <JFXTextField fx:id="txt_recovery" focusColor="WHITE" layoutX="183.0" layoutY="195.0" prefHeight="26.0"
+                      prefWidth="350.0" promptText="Recovery Word" style="-fx-text-inner-color: White;"
+                      unFocusColor="#e91e63">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </JFXTextField>
+        <JFXButton layoutX="319.0" layoutY="293.0" onAction="#loginBtnClicked" prefHeight="38.0" prefWidth="77.0"
+                   ripplerFill="WHITE" style="-fx-background-color: #e91e63;" text="Check" textFill="WHITE">
+            <font>
+                <Font size="16.0"/>
+            </font>
+        </JFXButton>
+    </AnchorPane>
+</StackPane>

@@ -29,7 +29,7 @@
                 <Image url="@../icon.png" />
             </image>
         </ImageView>
-        <JFXButton layoutX="24.0" layoutY="335.0" prefHeight="38.0" prefWidth="154.0" ripplerFill="WHITE" style="-fx-background-color: #e91e63;" text="Forget Password" textFill="WHITE">
+        <JFXButton layoutX="24.0" layoutY="335.0" onAction="#forgetPassword" prefHeight="38.0" prefWidth="154.0" ripplerFill="WHITE" style="-fx-background-color: #e91e63;" text="Forget Password" textFill="WHITE">
             <font>
                 <Font size="14.0" />
             </font>
@@ -44,5 +44,15 @@
                 <Font size="26.0" />
             </font>
         </Label>
+      <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="335.0" layoutY="201.0" onMousePressed="#visiblePass" onMouseReleased="#unVisiblePass" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/eye_100px.png" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="visiblePass" focusColor="WHITE" layoutX="24.0" layoutY="195.0" prefHeight="26.0" prefWidth="350.0" promptText="Password" style="-fx-text-inner-color: White;" unFocusColor="#e91e63" visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXTextField>
     </AnchorPane>
 </StackPane>

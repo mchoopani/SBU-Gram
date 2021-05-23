@@ -10,8 +10,7 @@ import java.util.Vector;
 import java.util.stream.Collectors;
 
 public class Repository {
-//    private static ArrayList<Post> posts = new ArrayList<>();
-    private static Vector<Post> posts = new Vector<>();
+    public static Vector<Post> posts = new Vector<>();
     private static Vector<User> users = new Vector<>();
 
     public static void addPost(Post post) {
@@ -41,6 +40,12 @@ public class Repository {
             if (t.equals(u))
                 return true;
         return false;
+    }
+    public static User getUserByUsername(String username){
+        for(User user : users)
+            if (user.getID().equals(username))
+                return user;
+        return null;
     }
     public static boolean userExists(User thisUser) {
         return exists(users,thisUser);

@@ -9,13 +9,11 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class Server {
-    static ArrayList<User> users = new ArrayList<>();
-    ServerSocket serverSocket;
 
     public void startUpServer() throws IOException {
-        serverSocket = new ServerSocket(8080);
-        new LoginHandling(serverSocket).start();
+        new LoginHandling(new ServerSocket(8080)).start();
         new SignupHandling(new ServerSocket(8081)).start();
+        new ForgetHandling(new ServerSocket(8082)).start();
     }
 }
 
@@ -62,6 +60,7 @@ class LoginHandling extends Thread {
         }
     }
 }
+
 class SignupHandling extends Thread {
     ServerSocket serverSocket;
 
@@ -78,25 +77,31 @@ class SignupHandling extends Thread {
                 DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
                 new Thread(
                         () -> {
-                            while (true){
+                            while (true) {
                                 try {
-                                    Pack pack = (Pack)dis.readObject();
+                                    Pack pack;
+                                    try {
+                                        pack = (Pack) dis.readObject();
+                                    } catch (EOFException e) {
+                                        System.out.println(e.getMessage());
+                                        continue;
+                                    }
                                     User user = (User) pack.nodes.get(0);
                                     String fileName = (String) pack.nodes.get(1);
                                     byte[] image = (byte[]) pack.nodes.get(2);
-                                    if (Repository.userExists(user)){
-                                            try {
-                                                dos.writeUTF("Username is already in use ...");
-                                                dos.flush();
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            }
+                                    if (Repository.userExists(user)) {
+                                        try {
+                                            dos.writeUTF("Username is already in use ...");
+                                            dos.flush();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
 
-                                    }else {
+                                    } else {
                                         if (image != null && image.length != 1 && fileName != null && fileName.length() != 0) {
                                             new File("D:/College/AP/SBU Gram/src/server/res/" + user.getID()).mkdir();
-                                            new File("D:/College/AP/SBU Gram/src/server/res/"+user.getID()+"/"+fileName).createNewFile();
-                                            File file = new File("D:/College/AP/SBU Gram/src/server/res/"+user.getID()+"/"+fileName);
+                                            new File("D:/College/AP/SBU Gram/src/server/res/" + user.getID() + "/" + fileName).createNewFile();
+                                            File file = new File("D:/College/AP/SBU Gram/src/server/res/" + user.getID() + "/" + fileName);
                                             FileOutputStream fileOutputStream = new FileOutputStream(file);
                                             fileOutputStream.write(image);
                                             fileOutputStream.flush();
@@ -120,6 +125,55 @@ class SignupHandling extends Thread {
         }
     }
 }
+
+class ForgetHandling extends Thread {
+    ServerSocket serverSocket;
+
+    public ForgetHandling(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                Socket socket = serverSocket.accept();
+                DataInputStream dis = new DataInputStream(socket.getInputStream());
+                DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+                new Thread(
+                        () -> {
+                            try {
+                                while (true) {
+                                    String pack = dis.readUTF();
+                                    String[] UR = pack.split("[*]");
+                                    User user = Repository.getUserByUsername(UR[0]);
+                                    if (user != null) {
+                                        if (user.getRecoveryWord().equals(UR[1]))
+                                            dos.writeUTF("Your Password is : " + user.getPassword());
+                                        else
+                                            dos.writeUTF("Sorry! Recovery Word is wrong...");
+                                        dos.flush();
+                                        dos.close();
+                                        dis.close();
+                                        socket.close();
+                                        break;
+                                    } else {
+                                        dos.writeUTF("User doesn't exist!");
+                                        dos.flush();
+                                    }
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                ).start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
 class WaitForClient implements Runnable {
     ServerSocket serverSocket;
 

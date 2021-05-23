@@ -5,30 +5,40 @@ import java.net.Socket;
 import java.util.*;
 
 public class User implements Serializable {
+    private String recoveryWord;
     private String ID;
     private String password;
     private String name;
     private String profilePath;
+    private String address = "World";
+    private String job = "Human";
+    private String birthday = "Y/M/D";
     private Socket socket;
     private Set<User> followings = new HashSet<>();
     private ArrayList<User> followers = new ArrayList<>();
-    public void addFollowing(User following){
+
+    public void addFollowing(User following) {
         followings.add(following);
     }
-    public User(String ID, String name,String password) {
+
+    public User(String ID, String name, String password, String recoveryWord) {
         this.ID = ID;
         this.name = name;
         this.password = password;
+        this.recoveryWord = recoveryWord;
     }
-    public void setImage(String path){
+
+    public void setImage(String path) {
         profilePath = path;
     }
-    public String getImage(){
-        if (profilePath == null){
+
+    public String getImage() {
+        if (profilePath == null) {
             profilePath = "D:\\College\\AP\\SBU Gram\\src\\nullprof.jpg";
         }
         return profilePath;
     }
+
     public String getName() {
         return name;
     }
@@ -63,4 +73,39 @@ public class User implements Serializable {
         return name;
     }
 
+    public void setAddress(String country, String city) {
+        if (country == null)
+            country = "World";
+        if (city == null)
+            city = "Earth";
+        this.address = country + " - " + city;
+    }
+
+    public void setJob(String job) {
+        if (job.equals(""))
+            return;
+        this.job = job;
+    }
+
+    public void setBirthday(String y, String m, String d) {
+        if (y.equals("") || m.equals("") || d.equals(""))
+            return;
+        this.birthday = y + "/" + m + "/" + d;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public String getRecoveryWord() {
+        return recoveryWord;
+    }
 }

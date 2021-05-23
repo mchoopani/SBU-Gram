@@ -1,8 +1,10 @@
 package Model;
 
+import Controller.TimelinePage;
 import Widgets.MyDialog;
 import javafx.scene.layout.StackPane;
 
+import java.awt.event.MouseEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -19,6 +21,13 @@ public class LoginModel {
                 .setTitle("Server Said","#e5c07b")
                 .setMessage(dis.readUTF(),"#ffffff")
                 .setButton("Ok","#1a237e","#ffffff")
+                .setAction(a-> {
+                    try {
+                        new PageLoader().load("timeline_page");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                })
                 .show();
     }
 }
