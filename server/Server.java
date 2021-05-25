@@ -105,15 +105,13 @@ class SignupHandling extends Thread {
                                             FileOutputStream fileOutputStream = new FileOutputStream(file);
                                             fileOutputStream.write(image);
                                             fileOutputStream.flush();
-                                            user.setImage(file.getAbsolutePath());
+                                            user.setProfileImage(image);
                                         }
                                         Repository.addUser(user);
                                         dos.writeUTF("Signup Completed.");
                                         dos.flush();
                                     }
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                } catch (ClassNotFoundException e) {
+                                } catch (IOException | ClassNotFoundException e) {
                                     e.printStackTrace();
                                 }
                             }

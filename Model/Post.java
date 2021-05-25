@@ -1,5 +1,8 @@
 package Model;
 
+import javafx.scene.image.Image;
+
+import java.io.ByteArrayInputStream;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,6 +15,7 @@ public class Post {
     private int likes;
     private User publisher;
     private Date publishDate;
+    private Image image;
 
     public Post(String title, String text,User publisher,String writer) {
         postId = id++;
@@ -65,5 +69,21 @@ public class Post {
     @Override
     public int hashCode() {
         return Objects.hash(postId);
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = new Image(new ByteArrayInputStream(image));
+    }
+
+    public Image getImage() {
+        return image;
     }
 }

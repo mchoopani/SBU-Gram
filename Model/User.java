@@ -1,5 +1,10 @@
 package Model;
 
+import javafx.scene.image.Image;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.Serializable;
 import java.net.Socket;
 import java.util.*;
@@ -9,13 +14,13 @@ public class User implements Serializable {
     private String ID;
     private String password;
     private String name;
-    private String profilePath;
     private String address = "World";
     private String job = "Human";
     private String birthday = "Y/M/D";
     private Socket socket;
     private Set<User> followings = new HashSet<>();
     private ArrayList<User> followers = new ArrayList<>();
+    private Image profileImage;
 
     public void addFollowing(User following) {
         followings.add(following);
@@ -28,15 +33,12 @@ public class User implements Serializable {
         this.recoveryWord = recoveryWord;
     }
 
-    public void setImage(String path) {
-        profilePath = path;
+    public void setProfileImage(byte[] img) {
+        this.profileImage = new Image(new ByteArrayInputStream(img));
     }
 
-    public String getImage() {
-        if (profilePath == null) {
-            profilePath = "D:\\College\\AP\\SBU Gram\\src\\nullprof.jpg";
-        }
-        return profilePath;
+    public Image getProfileImage() {
+        return profileImage;
     }
 
     public String getName() {
