@@ -30,7 +30,7 @@ public class LoginController {
     public JFXPasswordField passwordTF;
 
 
-    public void loginBtnClicked(ActionEvent event) throws IOException {
+    public void loginBtnClicked(ActionEvent event) throws IOException, ClassNotFoundException {
         String username = usernameTF.getText();
         String password = passwordTF.getText();
         if (username.length() == 0 || password.length() == 0) {

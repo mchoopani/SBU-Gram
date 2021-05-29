@@ -3,19 +3,20 @@ package Model;
 import javafx.scene.image.Image;
 
 import java.io.ByteArrayInputStream;
-import java.util.Date;
-import java.util.Objects;
+import java.io.Serializable;
+import java.util.*;
 
-public class Post {
+public class Post implements Serializable {
     private static long id = 1L;
     private long postId;
     private String writer;
     private String title;
     private String text;
-    private int likes;
+    private Set<String> likes;
+    private ArrayList<String> reposts;
     private User publisher;
     private Date publishDate;
-    private Image image;
+    private byte[] image;
 
     public Post(String title, String text,User publisher,String writer) {
         postId = id++;
@@ -24,6 +25,8 @@ public class Post {
         this.publisher = publisher;
         publishDate = new Date();
         this.writer = writer;
+        likes = new HashSet<>();
+        reposts = new ArrayList<>();
     }
 
     public User getPublisher() {
@@ -43,19 +46,31 @@ public class Post {
                 ", publisher=" + publisher +
                 '}';
     }
-    public void like(){
-        likes++;
+
+    public long getId() {
+        return postId;
     }
-    public void unlike(){
-        likes--;
+
+    public boolean likedBefore(String username){
+        return likes.contains(username);
+    }
+    public void like(String username){
+        likes.add(username);
+    }
+    public void unlike(String username){
+        likes.remove(username);
     }
 
     public int getLikes() {
-        return likes;
+        return likes.size();
     }
 
     public Post repost(User reposter){
+        reposts.add(reposter.getID());
         return new Post(title,text,reposter,writer);
+    }
+    public int getReposts(){
+        return reposts.size();
     }
 
     @Override
@@ -80,10 +95,10 @@ public class Post {
     }
 
     public void setImage(byte[] image) {
-        this.image = new Image(new ByteArrayInputStream(image));
+        this.image = image;
     }
 
-    public Image getImage() {
+    public byte[] getImage() {
         return image;
     }
 }

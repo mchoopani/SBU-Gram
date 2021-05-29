@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="400.0" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #443c4b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TimelinePage">
+    <children>
+      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #282C34;">
+          <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="6.0" layoutY="7.0" onMouseClicked="#menu" pickOnBounds="true" preserveRatio="true">
+              <Image url="@../images/menu.png" />
+          </ImageView>
+          <Label alignment="CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="188.0" prefWidth="315.0" text="TIMELINE" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="21.0" />
+            </font></Label>
+          <ImageView fitHeight="104.0" fitWidth="43.0" layoutX="89.0" layoutY="10.0" onMouseClicked="#refresh" pickOnBounds="true" preserveRatio="true">
+              <Image url="@../images/refresh.png" />
+          </ImageView>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+        <ListView fx:id="postList" maxWidth="1.7976931348623157E308" onMouseClicked="#onClick" prefHeight="600.0" style="-fx-background-color: #282C34;" />
+    </children>
+</VBox>

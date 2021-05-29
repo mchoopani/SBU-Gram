@@ -2,26 +2,33 @@ package Controller;
 
 import Model.PageLoader;
 import Model.Post;
+import Model.TimelineModel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Paths;
 
 public class PostItemController {
     public AnchorPane root;
-    public ImageView profileImage;
+    public Circle prof;
     public ImageView img_post;
+    public ImageView img_like;
+    public ImageView img_repost;
     public Label txt_name;
     public Label txt_title;
     public Label txt_text;
-    Post post;
+    public Label txt_date;
+    public Label repostCount;
+    public Label likeCount;
+    private Post post;
+    private boolean liked;
 
     //each list item will have its exclusive controller in runtime so we set the controller as we load the fxml
     public PostItemController(Post post) throws IOException {
@@ -31,13 +38,18 @@ public class PostItemController {
 
     //this anchor pane is returned to be set as the list view item
     public AnchorPane init() {
-
-        profileImage.setImage(post.getPublisher().getProfileImage());
+        liked = post.likedBefore(Properties.user.getID());
+        prof.setFill(new ImagePattern(new Image(new ByteArrayInputStream(post.getPublisher().getProfileImage()))));
         txt_title.setText(post.getTitle());
         txt_name.setText(post.getPublisher().getName());
         txt_text.setText(post.getText());
-        img_post.setImage(post.getImage());
-
+        txt_date.setText(post.getPublishDate().toString());
+        img_post.setImage(new Image(new ByteArrayInputStream(post.getImage())));
+        likeCount.setText(post.getLikes()+"");
+        repostCount.setText(post.getReposts()+"");
+        if (liked){
+            img_like.setImage(new Image(new File("D:\\College\\AP\\SBU Gram\\src\\images\\liked.png").toURI().toString()));
+        }
         return root;
     }
 
@@ -48,8 +60,21 @@ public class PostItemController {
 
     public void comment(MouseEvent mouseEvent) {
     }
-    public void like(MouseEvent mouseEvent){
-        System.out.println(post.getTitle() + " liked.");
+    public void like(MouseEvent mouseEvent) throws IOException {
+        if (liked){
+            liked = false;
+            likeCount.setText(Integer.parseInt(likeCount.getText())-1+"");
+            img_like.setImage(new Image(new File("D:\\\\College\\\\AP\\\\SBU Gram\\\\src\\\\images\\\\like.png").toURI().toString()));
+            TimelineModel.unlike(post);
+        }else {
+            liked = true;
+            likeCount.setText(Integer.parseInt(likeCount.getText())+1+"");
+            img_like.setImage(new Image(new File("D:\\College\\AP\\SBU Gram\\src\\images\\liked.png").toURI().toString()));
+            TimelineModel.like(post);
+        }
+    }
+    public void repost(MouseEvent event){
+
     }
     /*
     you can also add on mouse click for like and repost image

@@ -19,8 +19,8 @@ public class User implements Serializable {
     private String birthday = "Y/M/D";
     private Socket socket;
     private Set<User> followings = new HashSet<>();
-    private ArrayList<User> followers = new ArrayList<>();
-    private Image profileImage;
+    private Set<User> followers = new HashSet<>();
+    private byte[] profileImage;
 
     public void addFollowing(User following) {
         followings.add(following);
@@ -34,10 +34,10 @@ public class User implements Serializable {
     }
 
     public void setProfileImage(byte[] img) {
-        this.profileImage = new Image(new ByteArrayInputStream(img));
+        this.profileImage = img;
     }
 
-    public Image getProfileImage() {
+    public byte[] getProfileImage() {
         return profileImage;
     }
 

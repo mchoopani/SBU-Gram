@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="root" style="-fx-background-color: #282c34;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox alignment="CENTER" layoutX="13.0" layoutY="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <HBox>
+                    <children>
+                        <Circle fx:id="prof" fill="WHITE" radius="33.0" stroke="BLACK" strokeType="INSIDE" />
+                        <VBox>
+                            <children>
+                                <Label fx:id="txt_date" nodeOrientation="RIGHT_TO_LEFT" text="2020 5 31 19:15" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="txt_name" prefHeight="18.0" text="Name" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="txt_title" alignment="CENTER" contentDisplay="TOP" prefHeight="30.0" prefWidth="26.0" text="Title" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <HBox.margin>
+                                <Insets left="5.0" />
+                            </HBox.margin>
+                        </VBox>
+                    </children>
+                </HBox>
+                <Label fx:id="txt_text" prefWidth="302.0" text="Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups." textFill="WHITE" wrapText="true">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </Label>
+                <ImageView fx:id="img_post" fitHeight="179.0" fitWidth="302.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../tree.jpg" />
+                    </image>
+                </ImageView>
+                <AnchorPane>
+                    <children>
+                        <ImageView fitHeight="39.0" fitWidth="42.0"  pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0">
+                            <image>
+                                <Image url="@../images/comment.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="img_like" fitHeight="39.0" fitWidth="42.0" layoutX="78.39999389648438"  pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0">
+                            <image>
+                                <Image url="@../images/like.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="img_repost" fitHeight="39.0" fitWidth="39.0" layoutX="39.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/repost.png" />
+                            </image>
+                        </ImageView>
+                        <Label fx:id="repostCount" layoutX="78.0" layoutY="7.0" text="0" textFill="#ffea00">
+                            <font>
+                                <Font name="System Bold" size="20.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="likeCount" layoutX="251.0" layoutY="8.0" text="0" textFill="#ffea00" AnchorPane.rightAnchor="39.39999999999998">
+                            <font>
+                                <Font name="System Bold" size="20.0" />
+                            </font>
+                        </Label>
+                  <Button layoutX="263.0" onMouseClicked="#like" layoutY="4.0" mnemonicParsing="false" opacity="0" prefHeight="39.0" prefWidth="39.0" text="Button" AnchorPane.rightAnchor="0.19999999999997442" />
+                  <Button layoutX="38.0"  onMouseClicked="#repost" mnemonicParsing="false" opacity="0" prefHeight="39.0" prefWidth="39.0" text="Button" />
+                  <Button layoutY="-1.0"  onMouseClicked="#comment" mnemonicParsing="false" opacity="0" prefHeight="39.0" prefWidth="39.0" text="Button" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+
+    </children>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+    </padding>
+</AnchorPane>

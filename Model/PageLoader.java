@@ -18,6 +18,7 @@ public class PageLoader {
 
         stage = primaryStage;
         stage.setTitle("SBU GRAM");
+        stage.setMinWidth(400);
         stage.initStyle(StageStyle.DECORATED); //the three buttons on top of stage will be shown
         stage.setResizable(true); //the resizable button is enabled. if your design is responsive this must be true
         primaryStage.getIcons().add(new Image("icon.png"));

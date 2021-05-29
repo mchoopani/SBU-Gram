@@ -77,6 +77,14 @@ public class SignupController {
                     .setButton("Ok","#f50057","#ffffff")
                     .show();
         }
+        else if(!txt_pass1.getText().matches("[a-zA-Z0-9]{8,}")){
+            new MyDialog(sign_sp,"#f50057")
+                    .setTitle("Error!","#e5c07b")
+                    .setMessage("Password length should >= 8 and just can have latin characters and numbers!" +
+                            "\nCorrect Example: Mahmood123456","#ffffff")
+                    .setButton("Ok","#f50057","#ffffff")
+                    .show();
+        }
         else {
             User user = new User(txt_username.getText(),txt_name.getText(),txt_pass1.getText(),txt_recovery.getText());
             user.setAddress(txt_country.getText(),txt_city.getText());

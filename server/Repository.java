@@ -3,10 +3,7 @@ package server;
 import Model.Post;
 import Model.User;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Repository {
@@ -55,5 +52,20 @@ public class Repository {
     }
     public static ArrayList<User> getUsers() {
         return new ArrayList<>(users);
+    }
+    public static ArrayList<Post> getFollowingPosts(String username){
+        User user = getUserByUsername(username);
+        ArrayList<Post> output = new ArrayList<>();
+        if (user == null) return output;
+        Set<User> followings = user.getFollowings();
+        return (ArrayList<Post>) posts.stream().filter(post -> followings.contains(post.getPublisher())).sorted(Comparator.comparing(Post::getPublishDate)).collect(Collectors.toList());
+    }
+
+    public static Post getPostById(String id) {
+        for (Post post : posts){
+            if (id.equals(post.getId()+""))
+                return post;
+        }
+        return null;
     }
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #282c34;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MenuController">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="113.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="114.46780395507812">
+         <image>
+            <Image url="@../icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="41.0" fitWidth="46.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#closeMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/close.png" />
+         </image>
+      </ImageView>
+      <JFXButton buttonType="RAISED" layoutX="156.0" layoutY="300.0" onAction="#openProfile" ripplerFill="WHITE" text="Profile" textFill="WHITE" AnchorPane.rightAnchor="158.4">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="127.0" layoutY="361.0" onAction="#openPV" ripplerFill="WHITE" text="Private Chats" textFill="WHITE" AnchorPane.rightAnchor="129.8">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="143.0" layoutY="426.0" onAction="#newPost" ripplerFill="WHITE" text="New Post" textFill="WHITE" AnchorPane.rightAnchor="146.6">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="149.0" layoutY="545.0" onAction="#logout" ripplerFill="WHITE" text="Log Out" textFill="RED">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
