@@ -253,9 +253,15 @@ class AddPostHandler extends Thread {
                 String title = (String) pack.nodes.get(0);
                 String text = (String) pack.nodes.get(1);
                 String publisherName = (String) pack.nodes.get(2);
-                String writerName = (String) pack.nodes.get(3);
-                byte[] image = (byte[]) pack.nodes.get(4);
-                Post post = new Post(title, text, Repository.getUserByUsername(publisherName), writerName);
+                byte[] image = (byte[]) pack.nodes.get(3);
+                boolean isRepost = (boolean) pack.nodes.get(4);
+                Post post = new Post(title, text, Repository.getUserByUsername(publisherName));
+                if (isRepost) {
+                    Post reference = Repository.getPostById((String) pack.nodes.get(5));
+                    reference.addReposts();
+                    post.setReferencePost(reference);
+
+                }
                 post.setImage(image);
                 Repository.addPost(post);
                 System.out.println("New Post Added");

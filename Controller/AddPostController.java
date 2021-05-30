@@ -2,6 +2,7 @@ package Controller;
 
 import Model.AddPostModel;
 import Model.PageLoader;
+import Model.User;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.scene.image.Image;
@@ -33,7 +34,7 @@ public class AddPostController {
     }
 
     public void send(MouseEvent mouseEvent) throws IOException {
-        AddPostModel.sendPost(txt_title.getText(),txt_text.getText(),image);
+        AddPostModel.sendPost(txt_title.getText(),txt_text.getText(),image, Properties.user.getID(),false,"");
     }
 
     public void back(MouseEvent mouseEvent) throws IOException {

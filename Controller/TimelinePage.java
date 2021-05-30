@@ -24,7 +24,7 @@ public class TimelinePage {
     public ListView<Post> postList;
 
     List<Post> posts;
-    Post currentPost = new Post("", "", null, "");
+    Post currentPost = new Post("", "", null);
 
     @FXML
     public void initialize() throws IOException, ClassNotFoundException {

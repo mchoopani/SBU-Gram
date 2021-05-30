@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.AddPostModel;
 import Model.PageLoader;
 import Model.Post;
 import Model.TimelineModel;
@@ -41,7 +42,7 @@ public class PostItemController {
         liked = post.likedBefore(Properties.user.getID());
         prof.setFill(new ImagePattern(new Image(new ByteArrayInputStream(post.getPublisher().getProfileImage()))));
         txt_title.setText(post.getTitle());
-        txt_name.setText(post.getPublisher().getName());
+        txt_name.setText(post.getReferencePost().getPublisher().getName());
         txt_text.setText(post.getText());
         txt_date.setText(post.getPublishDate().toString());
         if (post.getImage() != null)
@@ -65,7 +66,7 @@ public class PostItemController {
         if (liked){
             liked = false;
             likeCount.setText(Integer.parseInt(likeCount.getText())-1+"");
-            img_like.setImage(new Image(new File("D:\\\\College\\\\AP\\\\SBU Gram\\\\src\\\\images\\\\like.png").toURI().toString()));
+            img_like.setImage(new Image(new File("D:\\College\\AP\\SBU Gram\\src\\images\\like.png").toURI().toString()));
             TimelineModel.unlike(post);
         }else {
             liked = true;
@@ -74,10 +75,8 @@ public class PostItemController {
             TimelineModel.like(post);
         }
     }
-    public void repost(MouseEvent event){
-
+    public void repost(MouseEvent event) throws IOException {
+        AddPostModel.sendPost(post.getTitle(),post.getText(),post.getImage(),Properties.user.getID(),true,post.getReferencePost().getId()+"");
+        repostCount.setText(Integer.parseInt(repostCount.getText())+1+"");
     }
-    /*
-    you can also add on mouse click for like and repost image
-     */
 }

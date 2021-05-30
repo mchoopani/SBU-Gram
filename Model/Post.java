@@ -9,24 +9,24 @@ import java.util.*;
 public class Post implements Serializable {
     private static long id = 1L;
     private long postId;
-    private String writer;
+//    private String writer;
+    private Post referencePost;
     private String title;
     private String text;
     private Set<String> likes;
-    private ArrayList<String> reposts;
+    private int reposts;
     private User publisher;
     private Date publishDate;
     private byte[] image;
 
-    public Post(String title, String text,User publisher,String writer) {
+    public Post(String title, String text,User publisher) {
         postId = id++;
         this.title = title;
         this.text = text;
         this.publisher = publisher;
         publishDate = new Date();
-        this.writer = writer;
+        this.referencePost = this;
         likes = new HashSet<>();
-        reposts = new ArrayList<>();
     }
 
     public User getPublisher() {
@@ -64,9 +64,11 @@ public class Post implements Serializable {
     public int getLikes() {
         return likes.size();
     }
-
+    public void addReposts(){
+        reposts++;
+    }
     public int getReposts(){
-        return reposts.size();
+        return reposts;
     }
 
     @Override
@@ -96,5 +98,13 @@ public class Post implements Serializable {
 
     public byte[] getImage() {
         return image;
+    }
+
+    public Post getReferencePost() {
+        return referencePost;
+    }
+
+    public void setReferencePost(Post referencePost) {
+        this.referencePost = referencePost;
     }
 }
