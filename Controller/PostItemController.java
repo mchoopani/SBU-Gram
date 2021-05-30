@@ -44,7 +44,8 @@ public class PostItemController {
         txt_name.setText(post.getPublisher().getName());
         txt_text.setText(post.getText());
         txt_date.setText(post.getPublishDate().toString());
-        img_post.setImage(new Image(new ByteArrayInputStream(post.getImage())));
+        if (post.getImage() != null)
+            img_post.setImage(new Image(new ByteArrayInputStream(post.getImage())));
         likeCount.setText(post.getLikes()+"");
         repostCount.setText(post.getReposts()+"");
         if (liked){

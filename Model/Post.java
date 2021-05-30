@@ -65,10 +65,6 @@ public class Post implements Serializable {
         return likes.size();
     }
 
-    public Post repost(User reposter){
-        reposts.add(reposter.getID());
-        return new Post(title,text,reposter,writer);
-    }
     public int getReposts(){
         return reposts.size();
     }

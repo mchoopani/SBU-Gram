@@ -26,17 +26,20 @@ public class MenuController {
     }
 
     @FXML
-    void newPost(ActionEvent event) {
+    void newPost(ActionEvent event) throws IOException {
+        TimelineModel.disconnect();
+        new PageLoader().load("addpost_page");
+    }
+
+    @FXML
+    void openPV(ActionEvent event) throws IOException {
+        TimelineModel.disconnect();
 
     }
 
     @FXML
-    void openPV(ActionEvent event) {
-
-    }
-
-    @FXML
-    void openProfile(ActionEvent event) {
+    void openProfile(ActionEvent event) throws IOException {
+        TimelineModel.disconnect();
 
     }
 }

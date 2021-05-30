@@ -49,6 +49,7 @@ public class TimelinePage {
     }
 
     public void refresh(MouseEvent mouseEvent) throws IOException {
+        TimelineModel.disconnect();
         new PageLoader().load("timeline_page");
     }
 }

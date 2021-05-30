@@ -17,6 +17,7 @@ public class Server {
         new SignupHandling(new ServerSocket(8081)).start();
         new ForgetHandling(new ServerSocket(8082)).start();
         new Timeline(new ServerSocket(8083)).start();
+        new AddPostHandler(new ServerSocket(8084)).start();
     }
 }
 
@@ -219,6 +220,46 @@ class Timeline extends Thread {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+}
+
+class AddPostHandler extends Thread {
+    private ServerSocket serverSocket;
+
+    public AddPostHandler(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            Socket socket = null;
+            ObjectInputStream ois = null;
+            try {
+                socket = serverSocket.accept();
+                ois = new ObjectInputStream(socket.getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ObjectInputStream finalOis = ois;
+            new Thread(() -> {
+                Pack pack = null;
+                try {
+                    pack = (Pack) finalOis.readObject();
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                String title = (String) pack.nodes.get(0);
+                String text = (String) pack.nodes.get(1);
+                String publisherName = (String) pack.nodes.get(2);
+                String writerName = (String) pack.nodes.get(3);
+                byte[] image = (byte[]) pack.nodes.get(4);
+                Post post = new Post(title, text, Repository.getUserByUsername(publisherName), writerName);
+                post.setImage(image);
+                Repository.addPost(post);
+                System.out.println("New Post Added");
+            }).start();
         }
     }
 }
