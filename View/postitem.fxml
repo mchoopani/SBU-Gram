@@ -13,19 +13,37 @@
             <children>
                 <HBox>
                     <children>
-                        <Circle fx:id="prof" fill="WHITE" radius="33.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="prof" fill="WHITE" radius="33.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                         <VBox>
                             <children>
-                                <Label fx:id="txt_date" nodeOrientation="RIGHT_TO_LEFT" prefHeight="18.0" prefWidth="218.0" text="2020 5 31 19:15" textFill="WHITE">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="txt_name" prefHeight="18.0" prefWidth="220.0" text="Name" textFill="WHITE">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
+                        <HBox>
+                           <children>
+                              <Label fx:id="txt_username" layoutX="10.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="18.0" text="\@Mchoopani     " textFill="#cdc6c6" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                                      <Label fx:id="txt_date" nodeOrientation="RIGHT_TO_LEFT" prefHeight="18.0" text="2020 5 31 19:15" textFill="WHITE">
+                                          <font>
+                                              <Font name="System Bold" size="12.0" />
+                                          </font>
+                                      </Label>
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                                      <Label fx:id="txt_name" prefHeight="18.0" text="Name" textFill="WHITE">
+                                          <font>
+                                              <Font name="System Bold" size="12.0" />
+                                          </font>
+                                      </Label>
+                              <Label layoutX="10.0" layoutY="10.0" prefHeight="18.0" text="   Saied:" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
                                 <Label fx:id="txt_title" alignment="CENTER" contentDisplay="TOP" prefHeight="30.0" prefWidth="220.0" text="Title" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="12.0" />
@@ -43,7 +61,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </padding>
                 </Label>
-                <ImageView fx:id="img_post" fitHeight="179.0" fitWidth="302.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="img_post" fitHeight="179.0" fitWidth="302.0" pickOnBounds="true">
                     <image>
                         <Image url="@../tree.jpg" />
                     </image>
@@ -75,7 +93,7 @@
                                 <Font name="System Bold" size="20.0" />
                             </font>
                         </Label>
-                  <Button layoutX="263.0" layoutY="4.0" mnemonicParsing="false" onMouseClicked="#like" opacity="0" prefHeight="39.0" prefWidth="39.0" text="Button" AnchorPane.rightAnchor="0.19999999999997442" />
+                  <Button layoutX="263.0" layoutY="4.0" mnemonicParsing="false" onMouseClicked="#like" opacity="0.0" prefHeight="39.0" prefWidth="39.0" text="Button" AnchorPane.rightAnchor="0.19999999999997442" />
                   <Button layoutX="38.0" mnemonicParsing="false" onMouseClicked="#repost" opacity="0" prefHeight="39.0" prefWidth="39.0" text="Button" />
                   <Button layoutY="-1.0" mnemonicParsing="false" onMouseClicked="#comment" opacity="0" prefHeight="39.0" prefWidth="39.0" text="Button" />
                     </children>

@@ -23,6 +23,7 @@ public class PostItemController {
     public Label txt_title;
     public Label txt_text;
     public Label txt_date;
+    public Label txt_username;
     public Label repostCount;
     public Label likeCount;
     private Post post;
@@ -42,6 +43,7 @@ public class PostItemController {
         txt_name.setText(post.getReferencePost().getPublisher().getName());
         txt_text.setText(post.getText());
         txt_date.setText(post.getPublishDate().toString());
+        txt_username.setText("@"+post.getPublisher().getID()+"    ");
         if (post.getImage() != null)
             img_post.setImage(new Image(new ByteArrayInputStream(post.getImage())));
         likeCount.setText(post.getLikes()+"");
