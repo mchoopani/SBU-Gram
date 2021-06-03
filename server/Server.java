@@ -1,5 +1,6 @@
 package server;
 
+import Model.Comment;
 import Model.Post;
 import bridges.Pack;
 import Model.User;
@@ -18,6 +19,7 @@ public class Server {
         new ForgetHandling(new ServerSocket(8082)).start();
         new Timeline(new ServerSocket(8083)).start();
         new AddPostHandler(new ServerSocket(8084)).start();
+        new CommentHandler(new ServerSocket(8085)).start();
     }
 }
 
@@ -194,7 +196,8 @@ class Timeline extends Thread {
                                 try {
                                     command = dis.readUTF();
                                 } catch (IOException e) {
-                                    e.printStackTrace();
+//                                    e.printStackTrace();
+                                    continue ;
                                 }
                                 String[] splits = command.split("-");
                                 switch (splits[0]) {
@@ -267,5 +270,31 @@ class AddPostHandler extends Thread {
                 System.out.println("New Post Added");
             }).start();
         }
+    }
+}
+class CommentHandler extends Thread{
+    private ServerSocket serverSocket;
+
+    public CommentHandler(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (true){
+                Socket socket = serverSocket.accept();
+                socket.getOutputStream();
+                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+                Pack pack = (Pack) ois.readObject();
+                Comment comment = (Comment) pack.nodes.get(0);
+                long id = (long) pack.nodes.get(1);
+                Repository.getPostById(id + "").addComment(comment);
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 }

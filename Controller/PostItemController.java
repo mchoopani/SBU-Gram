@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.AddPostModel;
-import Model.PageLoader;
-import Model.Post;
-import Model.TimelineModel;
+import Model.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -60,7 +57,9 @@ public class PostItemController {
 
     }
 
-    public void comment(MouseEvent mouseEvent) {
+    public void comment(MouseEvent mouseEvent) throws IOException {
+        CommentModel.post = this.post;
+        new PageLoader().load("comment_page");
     }
     public void like(MouseEvent mouseEvent) throws IOException {
         if (liked){

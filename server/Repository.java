@@ -20,7 +20,7 @@ public class Repository {
     public static List<Post> getFollowingPosts(User responder) {
         return posts.stream()
                 .filter(post -> responder.getFollowings().contains(post.getPublisher()))
-                .sorted(Comparator.comparing(Post::getPublishDate))
+                .sorted((post1,post2)->post1.getPublishDate().compareTo(post2.getPublishDate()))
                 .collect(Collectors.toList());
     }
 

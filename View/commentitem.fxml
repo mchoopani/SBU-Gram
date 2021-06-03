@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="380.0" minHeight="-Infinity" minWidth="380.0" prefWidth="380.0" style="-fx-background-color: #282c34;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="55.0" prefWidth="400.0">
+         <children>
+            <Circle fx:id="img_prof" fill="WHITE" radius="19.0" stroke="BLACK" strokeType="INSIDE">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Circle>
+            <VBox prefHeight="65.0" prefWidth="335.0">
+               <children>
+                  <Label fx:id="txt_username" layoutX="10.0" layoutY="10.0" text="\@Mchoopani" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox>
+                     <children>
+                        <Label fx:id="txt_name" text="Mahmood" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="19.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="10.0" text=" Says:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="19.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets top="2.0" />
+         </padding>
+      </HBox>
+      <Label fx:id="txt_comment" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in neque mauris. Vestibulum et rutrum sem. Vivamus ac felis a sem sollicitudin molestie. Pellentesque elementum, sapien eget vestibulum sodales, dui dolor posuere risus, a facilisis odio erat at sapien. Phasellus libero velit, gravida sit amet lorem eget, tempor consequat dui. Phasellus a tortor eget urna pulvinar aliquet eu sed lacus. Donec interdum erat sit amet ante convallis malesuada. " textAlignment="JUSTIFY" textFill="WHITE" wrapText="true">
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </VBox.margin>
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+   </children>
+</VBox>

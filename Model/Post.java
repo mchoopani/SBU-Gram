@@ -9,7 +9,6 @@ import java.util.*;
 public class Post implements Serializable {
     private static long id = 1L;
     private long postId;
-//    private String writer;
     private Post referencePost;
     private String title;
     private String text;
@@ -18,6 +17,7 @@ public class Post implements Serializable {
     private User publisher;
     private Date publishDate;
     private byte[] image;
+    private Vector<Comment> comments;
 
     public Post(String title, String text,User publisher) {
         postId = id++;
@@ -27,6 +27,7 @@ public class Post implements Serializable {
         publishDate = new Date();
         this.referencePost = this;
         likes = new HashSet<>();
+        comments = new Vector<>();
     }
 
     public User getPublisher() {
@@ -106,5 +107,13 @@ public class Post implements Serializable {
 
     public void setReferencePost(Post referencePost) {
         this.referencePost = referencePost;
+    }
+
+    public void addComment(Comment comment){
+        comments.add(comment);
+    }
+
+    public ArrayList<Comment> getComments(){
+        return new ArrayList<>(comments);
     }
 }

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+
+<HBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CommentController">
+   <children>
+        <VBox alignment="CENTER" style="-fx-background-color: #282c34;">
+            <children>
+            <AnchorPane prefHeight="9.0" prefWidth="378.0">
+               <children>
+                       <ImageView fitHeight="43.0" fitWidth="43.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+                           <Image url="@../images/back.png" />
+                       </ImageView>
+               </children>
+            </AnchorPane>
+                <HBox prefHeight="67.0" prefWidth="339.0">
+                    <children>
+                        <Circle fx:id="prof" fill="WHITE" radius="33.0" stroke="BLACK" strokeType="INSIDE" />
+                        <VBox>
+                            <children>
+                                <Label fx:id="txt_date" nodeOrientation="RIGHT_TO_LEFT" prefHeight="18.0" prefWidth="218.0" text="2020 5 31 19:15" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="txt_name" prefHeight="18.0" prefWidth="220.0" text="Name" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="txt_title" alignment="CENTER" contentDisplay="TOP" prefHeight="30.0" prefWidth="220.0" text="Title" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <HBox.margin>
+                                <Insets left="5.0" />
+                            </HBox.margin>
+                        </VBox>
+                    </children>
+                </HBox>
+                <Label fx:id="txt_text" prefWidth="302.0" text="Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups." textFill="WHITE" wrapText="true">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </Label>
+                <ImageView fx:id="img_post" fitHeight="179.0" fitWidth="302.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../tree.jpg" />
+                    </image>
+                </ImageView>
+            </children>
+        </VBox>
+      <VBox style="-fx-background-color: #282c34;">
+         <children>
+            <AnchorPane>
+               <children>
+                  <Label layoutX="154.0" layoutY="12.0" text="Comments" textFill="WHITE" underline="true">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <ListView fx:id="commentList" prefWidth="400.0" style="-fx-background-color: #282c34;" />
+         </children>
+      </VBox>
+      <AnchorPane prefHeight="25.0" prefWidth="400.0" style="-fx-background-color: #282c34;">
+         <children>
+            <Label layoutX="87.0" layoutY="14.0" text="Write Your Comment Here" textFill="WHITE" underline="true">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <JFXTextArea fx:id="txt_comment" layoutX="14.0" layoutY="51.0" prefHeight="342.0" prefWidth="319.0" promptText="Write your comment here..." style="-fx-text-inner-color: #ffffff; -fx-background-color: #282c34;" unFocusColor="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+            </JFXTextArea>
+            <ImageView fitHeight="68.0" fitWidth="48.0" layoutX="338.0" layoutY="344.0" onMouseClicked="#publish" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/publish.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>
