@@ -29,14 +29,6 @@ public class LoginController {
     @FXML
     public JFXPasswordField passwordTF;
 
-    @FXML
-    public void initialize() throws IOException {
-        LoginModel.checkLoggedIn();
-        if (Properties.user != null){
-            usernameTF.setText(Properties.user.getID());
-            passwordTF.setText(Properties.user.getPassword());
-        }
-    }
 
     public void loginBtnClicked(ActionEvent event) throws IOException, ClassNotFoundException {
         String username = usernameTF.getText();

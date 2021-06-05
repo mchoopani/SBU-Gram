@@ -37,6 +37,8 @@ public class PostItemController {
 
     //this anchor pane is returned to be set as the list view item
     public AnchorPane init() {
+        if (!post.getReferencePost().equals(post))
+            root.setStyle("-fx-background-color: #263238;");
         liked = post.likedBefore(Properties.user.getID());
         prof.setFill(new ImagePattern(new Image(new ByteArrayInputStream(post.getPublisher().getProfileImage()))));
         txt_title.setText(post.getTitle());
@@ -47,7 +49,7 @@ public class PostItemController {
         if (post.getImage() != null)
             img_post.setImage(new Image(new ByteArrayInputStream(post.getImage())));
         likeCount.setText(post.getLikes()+"");
-        repostCount.setText(post.getReposts()+"");
+        repostCount.setText(post.getReferencePost().getReposts()+"");
         if (liked){
             img_like.setImage(new Image(new File("D:\\College\\AP\\SBU Gram\\src\\images\\liked.png").toURI().toString()));
         }

@@ -1,5 +1,7 @@
 package Controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,6 +24,7 @@ public class MenuController {
     void logout(ActionEvent event) throws IOException {
         Properties.user = null;
         TimelineModel.disconnect();
+        new FileOutputStream("D:\\College\\AP\\SBU Gram\\src\\Temporary\\login_data.bin").close();
         new PageLoader().load("login_page");
     }
 

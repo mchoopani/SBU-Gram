@@ -20,7 +20,7 @@ public class Repository {
     public static List<Post> getFollowingPosts(User responder) {
         return posts.stream()
                 .filter(post -> responder.getFollowings().contains(post.getPublisher()))
-                .sorted((post1,post2)->post1.getPublishDate().compareTo(post2.getPublishDate()))
+                .sorted((post1,post2)->-post1.getPublishDate().compareTo(post2.getPublishDate()))
                 .collect(Collectors.toList());
     }
 
@@ -57,8 +57,7 @@ public class Repository {
         User user = getUserByUsername(username);
         ArrayList<Post> output = new ArrayList<>();
         if (user == null) return output;
-        Set<User> followings = user.getFollowings();
-        return (ArrayList<Post>) posts.stream().filter(post -> followings.contains(post.getPublisher())).sorted(Comparator.comparing(Post::getPublishDate)).collect(Collectors.toList());
+        return (ArrayList<Post>) getFollowingPosts(user);
     }
 
     public static Post getPostById(String id) {
