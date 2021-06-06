@@ -7,4 +7,6 @@ import java.io.OutputStream;
 
 public class Properties {
     public static User user = null;
+    public static User profile = null;
+    public static boolean isInProfilePage = false;
 }

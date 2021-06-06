@@ -20,6 +20,8 @@ public class User implements Serializable {
     private Socket socket;
     private Set<User> followings = new HashSet<>();
     private Set<User> followers = new HashSet<>();
+    private Set<User> blockList = new HashSet<>();
+    private Set<User> muteList = new HashSet<>();
     private byte[] profileImage;
 
     public void addFollowing(User following) {
@@ -70,6 +72,10 @@ public class User implements Serializable {
         return followings;
     }
 
+    public Set<User> getFollowers() {
+        return followers;
+    }
+
     @Override
     public String toString() {
         return name;
@@ -109,5 +115,35 @@ public class User implements Serializable {
 
     public String getRecoveryWord() {
         return recoveryWord;
+    }
+
+    public boolean isMute(User user){
+        return muteList.contains(user);
+    }
+    public void mute(User userToMute){
+        muteList.add(userToMute);
+    }
+    public void unMute(User userToUnMute){
+        muteList.remove(userToUnMute);
+    }
+
+    public boolean isBlock(User user){
+        return blockList.contains(user);
+    }
+    public void block(User userToBlock){
+        blockList.add(userToBlock);
+    }
+    public void unBlock(User userToUnBlock){
+        blockList.remove(userToUnBlock);
+    }
+
+    public boolean isFollow(User user){
+        return followings.contains(user);
+    }
+    public void follow(User userToFollow){
+        followings.add(userToFollow);
+    }
+    public void unFollow(User userToUnFollow){
+        followings.remove(userToUnFollow);
     }
 }

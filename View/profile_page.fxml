@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+
+<StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProfileController">
+   <children>
+      <AnchorPane prefHeight="700.0" prefWidth="400.0" style="-fx-background-color: #282c34;">
+         <children>
+            <VBox layoutX="14.0" layoutY="14.0">
+               <children>
+                  <HBox prefHeight="44.0" prefWidth="382.0">
+                     <children>
+                        <ImageView fitHeight="52.0" fitWidth="46.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/back.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Circle fx:id="img_prof" fill="WHITE" radius="84.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                        <VBox>
+                           <children>
+                              <Label fx:id="txt_name" text="Mahmood Choopani" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="txt_username" text="\@MChoopani" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="txt_address" text="Iran - Boshrouyeh" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="txt_birthday" text="2002/05/31" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <HBox>
+                                 <children>
+                                    <AnchorPane>
+                                       <children>
+                                          <Label text="Followers" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="17.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="txt_follower" layoutX="18.0" layoutY="26.0" text="2000" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="17.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </AnchorPane>
+                                    <AnchorPane>
+                                       <children>
+                                          <Label text="Followings" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="17.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="txt_following" layoutX="23.0" layoutY="26.0" text="2500" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="17.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </HBox>
+                  <AnchorPane>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <children>
+                        <HBox fx:id="hisProfile" alignment="CENTER" prefHeight="40.0" prefWidth="382.0" spacing="5.0">
+                           <children>
+                              <JFXButton fx:id="btn_follow" onAction="#follow" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #303f9f;" text="Follow" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="btn_block" onAction="#block" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #e91e63;" text="Block" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton fx:id="btn_mute" onAction="#mute" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #ff8f00;" text="Mute" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </JFXButton>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <HBox fx:id="myProfile" alignment="CENTER" prefHeight="40.0" prefWidth="382.0">
+                           <children>
+                              <JFXButton onAction="#editProfile" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #303f9f;" text="Edit Profile" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton onAction="#deleteAccount" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #e91e63;" text="Delete Account" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+                  <ListView fx:id="postList" prefWidth="382.0">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </ListView>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets right="15.0" />
+         </padding>
+      </AnchorPane>
+   </children>
+</StackPane>

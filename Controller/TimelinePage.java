@@ -3,19 +3,13 @@ package Controller;
 import Model.PageLoader;
 import Model.Post;
 import Model.TimelineModel;
-import bridges.Pack;
+import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import server.Repository;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TimelinePage {
@@ -27,7 +21,7 @@ public class TimelinePage {
 
     @FXML
     public void initialize() throws IOException, ClassNotFoundException {
-
+        Properties.isInProfilePage = false;
         posts = (List<Post>) TimelineModel.connect().nodes.get(0);
 
         //initialize posts array list to be shown in list view

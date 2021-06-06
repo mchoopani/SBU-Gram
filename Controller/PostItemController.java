@@ -70,13 +70,23 @@ public class PostItemController {
             liked = false;
             likeCount.setText(Integer.parseInt(likeCount.getText())-1+"");
             img_like.setImage(new Image(new File("D:\\College\\AP\\SBU Gram\\src\\images\\like.png").toURI().toString()));
-            TimelineModel.unlike(post);
+            if (Properties.isInProfilePage)
+                ProfileModel.unlike(post);
+            else
+                TimelineModel.unlike(post);
         }else {
             liked = true;
             likeCount.setText(Integer.parseInt(likeCount.getText())+1+"");
             img_like.setImage(new Image(new File("D:\\College\\AP\\SBU Gram\\src\\images\\liked.png").toURI().toString()));
-            TimelineModel.like(post);
+            if (Properties.isInProfilePage)
+                ProfileModel.like(post);
+            else
+                TimelineModel.like(post);
         }
+    }
+    public void goToProfile(MouseEvent event) throws IOException {
+        Properties.profile = post.getPublisher();
+        new PageLoader().load("profile_page");
     }
     public void repost(MouseEvent event) throws IOException {
         AddPostModel.sendPost(post.getTitle(),post.getText(),post.getImage(),Properties.user.getID(),true,post.getReferencePost().getId()+"");

@@ -20,6 +20,7 @@ public class Server {
         new Timeline(new ServerSocket(8083)).start();
         new AddPostHandler(new ServerSocket(8084)).start();
         new CommentHandler(new ServerSocket(8085)).start();
+        new ProfileHandler(new ServerSocket(8086)).start();
     }
 }
 
@@ -296,5 +297,81 @@ class CommentHandler extends Thread{
             e.printStackTrace();
         }
 
+    }
+}
+class ProfileHandler extends Thread {
+    ServerSocket serverSocket;
+
+    public ProfileHandler(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                Socket socket = serverSocket.accept();
+                DataInputStream dis = new DataInputStream(socket.getInputStream());
+                ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+                String username = dis.readUTF();
+                ArrayList<Post> posts = Repository.getUserPosts(username);
+                Pack pack = new Pack(posts);
+                oos.writeObject(pack);
+                oos.flush();
+                new Thread(
+                        () -> {
+                            Loop:
+                            while (true) {
+                                String command = null;
+                                try {
+                                    command = dis.readUTF();
+                                } catch (IOException e) {
+//                                    e.printStackTrace();
+                                    continue ;
+                                }
+                                String[] splits = command.split("-");
+                                switch (splits[0]) {
+                                    case "like":
+                                        Repository.getPostById(splits[2]).like(splits[1]);
+                                        break;
+                                    case "unlike":
+                                        Repository.getPostById(splits[2]).unlike(splits[1]);
+                                        break;
+                                    case "follow":
+                                        Repository.getUserByUsername(splits[1]).follow(Repository.getUserByUsername(splits[2]));
+                                        System.out.println("Follow");
+                                        break;
+                                    case "unFollow":
+                                        Repository.getUserByUsername(splits[1]).unFollow(Repository.getUserByUsername(splits[2]));
+                                        break;
+                                    case "block":
+                                        Repository.getUserByUsername(splits[1]).block(Repository.getUserByUsername(splits[2]));
+                                        break;
+                                    case "unBlock":
+                                        Repository.getUserByUsername(splits[1]).unBlock(Repository.getUserByUsername(splits[2]));
+                                        break;
+                                    case "mute":
+                                        Repository.getUserByUsername(splits[1]).mute(Repository.getUserByUsername(splits[2]));
+                                        break;
+                                    case "unMute":
+                                        Repository.getUserByUsername(splits[1]).unMute(Repository.getUserByUsername(splits[2]));
+                                        break;
+                                    case "exit": {
+                                        try {
+                                            dis.close();
+                                            socket.close();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        break Loop;
+                                    }
+                                }
+                            }
+                        }
+                ).start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

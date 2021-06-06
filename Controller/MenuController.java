@@ -43,6 +43,8 @@ public class MenuController {
     @FXML
     void openProfile(ActionEvent event) throws IOException {
         TimelineModel.disconnect();
+        Properties.profile = Properties.user;
+        new PageLoader().load("profile_page");
 
     }
 }

@@ -18,7 +18,7 @@
                             <children>
                         <HBox>
                            <children>
-                              <Label fx:id="txt_username" layoutX="10.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="18.0" text="\@Mchoopani     " textFill="#cdc6c6" wrapText="true">
+                              <Label fx:id="txt_username" onMouseClicked="#goToProfile" layoutX="10.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="18.0" text="\@Mchoopani     " textFill="#cdc6c6" wrapText="true">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>

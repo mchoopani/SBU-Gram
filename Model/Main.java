@@ -31,6 +31,7 @@ public class Main extends Application {
         u7.setProfileImage(new FileInputStream("D:\\New folder\\24.jpg").readAllBytes());
         u7.addFollowing(u1);
         u7.addFollowing(u5);
+        u1.follow(u5);
         Repository.addUser(u0);
         Repository.addUser(u1);
         Repository.addUser(u2);
@@ -41,12 +42,6 @@ public class Main extends Application {
         Post p1 = new Post("T1", "Ali1", Repository.getUserByUsername("1001"));
         p1.setImage(new FileInputStream("D:\\New folder\\1.jpeg").readAllBytes());
         p1.addComment(new Comment(u0,"Ridi ke"));
-        p1.addComment(new Comment(u2,"Goh nakhor kooni sag"));
-        p1.addComment(new Comment(u0,"Madar be khata"));
-        p1.addComment(new Comment(u0,"Madar be khata"));
-        p1.addComment(new Comment(u0,"Madar be khata"));
-        p1.addComment(new Comment(u0,"Madar be khata"));
-        p1.addComment(new Comment(u0,"Madar be khata"));
         p1.addComment(new Comment(u0,"Madar be khata"));
         Post p2 = new Post("T2", "Ali2", Repository.getUserByUsername("1001"));
         p2.setImage(new FileInputStream("D:\\New folder\\4.jpeg").readAllBytes());

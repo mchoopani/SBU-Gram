@@ -19,7 +19,10 @@ public class Repository {
 
     public static List<Post> getFollowingPosts(User responder) {
         return posts.stream()
-                .filter(post -> responder.getFollowings().contains(post.getPublisher()))
+                .filter(post -> responder.getFollowings().contains(post.getPublisher()) &&
+                        !responder.isMute(post.getPublisher()) &&
+                        !post.getPublisher().isBlock(responder) &&
+                        !responder.isBlock(post.getPublisher()))
                 .sorted((post1,post2)->-post1.getPublishDate().compareTo(post2.getPublishDate()))
                 .collect(Collectors.toList());
     }
@@ -66,5 +69,12 @@ public class Repository {
                 return post;
         }
         return null;
+    }
+
+    public static ArrayList<Post> getUserPosts(String responder) {
+        return (ArrayList<Post>) posts.stream()
+                .filter(post -> post.getPublisher().getID().contains(responder))
+                .sorted((post1,post2)->-post1.getPublishDate().compareTo(post2.getPublishDate()))
+                .collect(Collectors.toList());
     }
 }
