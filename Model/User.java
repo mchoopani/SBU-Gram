@@ -14,10 +14,9 @@ public class User implements Serializable {
     private String ID;
     private String password;
     private String name;
-    private String address = "World";
+    private String address = "World - Earth";
     private String job = "Human";
     private String birthday = "Y/M/D";
-    private Socket socket;
     private Set<User> followings = new HashSet<>();
     private Set<User> followers = new HashSet<>();
     private Set<User> blockList = new HashSet<>();
@@ -47,12 +46,20 @@ public class User implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getID() {
         return ID;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -89,6 +96,10 @@ public class User implements Serializable {
         this.address = country + " - " + city;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public void setJob(String job) {
         if (job.equals(""))
             return;
@@ -99,6 +110,10 @@ public class User implements Serializable {
         if (y.equals("") || m.equals("") || d.equals(""))
             return;
         this.birthday = y + "/" + m + "/" + d;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public String getAddress() {

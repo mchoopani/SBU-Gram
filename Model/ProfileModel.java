@@ -1,6 +1,7 @@
 package Model;
 
 import Controller.Properties;
+import Widgets.MyDialog;
 import bridges.Pack;
 
 import java.io.*;
@@ -63,5 +64,20 @@ public class ProfileModel {
         DataOutputStream dos = new DataOutputStream(currentOutputStream);
         dos.writeUTF("exit");
         dos.flush();
+    }
+    public static void editProfile(User user,String fileName) throws IOException, ClassNotFoundException {
+        DataOutputStream dos = new DataOutputStream(currentOutputStream);
+        dos.writeUTF("edit");
+        ObjectOutputStream oos = new ObjectOutputStream(currentOutputStream);
+        oos.writeObject(new Pack(user,fileName));
+        oos.flush();
+        dos.flush();
+    }
+
+    public static void deleteAccount(String id) throws IOException {
+        DataOutputStream dos = new DataOutputStream(currentOutputStream);
+        dos.writeUTF("delete-"+id);
+        dos.flush();
+        new PageLoader().load("login_page");
     }
 }

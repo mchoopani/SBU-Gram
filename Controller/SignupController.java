@@ -64,7 +64,7 @@ public class SignupController {
             new MyDialog(sign_sp,"#f50057")
                     .setTitle("Error!","#e5c07b")
                     .setMessage("one or more field is null"
-                            +"\nPlease complete both fields at first, then click Signup.","#ffffff")
+                            +"\nPlease complete fields at first, then click Signup.","#ffffff")
                     .setButton("Ok","#f50057","#ffffff")
                     .show();
 

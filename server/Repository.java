@@ -70,11 +70,31 @@ public class Repository {
         }
         return null;
     }
-
+    public static void replace(User user){
+        for (User tempUser: users){
+            if (user.getID().equals(tempUser.getID())){
+                tempUser.setName(user.getName());
+                tempUser.setPassword(user.getPassword());
+                tempUser.setProfileImage(user.getProfileImage());
+                tempUser.setJob(user.getJob());
+                tempUser.setAddress(user.getAddress());
+                tempUser.setBirthday(user.getBirthday());
+            }
+        }
+    }
     public static ArrayList<Post> getUserPosts(String responder) {
         return (ArrayList<Post>) posts.stream()
                 .filter(post -> post.getPublisher().getID().contains(responder))
                 .sorted((post1,post2)->-post1.getPublishDate().compareTo(post2.getPublishDate()))
                 .collect(Collectors.toList());
+    }
+
+    public static void delete(String username) {
+        User toDeleteUser = getUserByUsername(username);
+        for (User user : users){
+            user.getFollowings().remove(toDeleteUser);
+            user.getFollowers().remove(toDeleteUser);
+        }
+        users.remove(toDeleteUser);
     }
 }

@@ -2,6 +2,7 @@ package Controller;
 
 import Model.LoginModel;
 import Model.PageLoader;
+import Model.User;
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,9 +12,7 @@ import javafx.scene.layout.StackPane;
 import Widgets.MyDialog;
 import server.Server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 
 
@@ -41,7 +40,30 @@ public class LoginController {
                     .setButton("Ok", "#f50057", "#ffffff")
                     .show();
         } else {
-            LoginModel.login(username, password, stackpane);
+            String message = LoginModel.login(username, password);
+            switch (message) {
+                case "SUCCESSFULL":
+                    new MyDialog(stackpane, "#1a237e")
+                            .setTitle("Server Said", "#e5c07b")
+                            .setMessage("Login Successfully done...", "#ffffff")
+                            .setButton("Ok", "#1a237e", "#ffffff")
+                            .setAction(a -> {
+                                try {
+                                    new PageLoader().load("timeline_page");
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            })
+                            .show();
+                    break;
+                case "WRONG":
+                    new MyDialog(stackpane, "#dd2c00")
+                            .setTitle("Server Said", "#e5c07b")
+                            .setMessage("Doesn't find a matched user!", "#ffffff")
+                            .setButton("Ok", "#dd2c00", "#ffffff")
+                            .show();
+                    break;
+            }
         }
     }
 

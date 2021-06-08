@@ -56,8 +56,8 @@ public class Main extends Application {
         new Server().startUpServer();
         call();
         PageLoader.initStage(primaryStage);
-        LoginModel.checkLoggedIn();
-        if (Properties.user != null)
+        boolean hasLogin = LoginModel.checkLoggedIn();
+        if (hasLogin)
             new PageLoader().load("timeline_page");
         else
             new PageLoader().load("login_page");

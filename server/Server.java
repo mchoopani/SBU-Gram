@@ -198,7 +198,7 @@ class Timeline extends Thread {
                                     command = dis.readUTF();
                                 } catch (IOException e) {
 //                                    e.printStackTrace();
-                                    continue ;
+                                    continue;
                                 }
                                 String[] splits = command.split("-");
                                 switch (splits[0]) {
@@ -273,7 +273,8 @@ class AddPostHandler extends Thread {
         }
     }
 }
-class CommentHandler extends Thread{
+
+class CommentHandler extends Thread {
     private ServerSocket serverSocket;
 
     public CommentHandler(ServerSocket serverSocket) {
@@ -283,7 +284,7 @@ class CommentHandler extends Thread{
     @Override
     public void run() {
         try {
-            while (true){
+            while (true) {
                 Socket socket = serverSocket.accept();
                 socket.getOutputStream();
                 ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
@@ -299,6 +300,7 @@ class CommentHandler extends Thread{
 
     }
 }
+
 class ProfileHandler extends Thread {
     ServerSocket serverSocket;
 
@@ -313,13 +315,17 @@ class ProfileHandler extends Thread {
                 Socket socket = serverSocket.accept();
                 DataInputStream dis = new DataInputStream(socket.getInputStream());
                 ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-                String username = dis.readUTF();
-                ArrayList<Post> posts = Repository.getUserPosts(username);
-                Pack pack = new Pack(posts);
-                oos.writeObject(pack);
-                oos.flush();
                 new Thread(
                         () -> {
+                            try {
+                                String username = dis.readUTF();
+                                ArrayList<Post> posts = Repository.getUserPosts(username);
+                                Pack pack = new Pack(posts);
+                                oos.writeObject(pack);
+                                oos.flush();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             Loop:
                             while (true) {
                                 String command = null;
@@ -327,7 +333,7 @@ class ProfileHandler extends Thread {
                                     command = dis.readUTF();
                                 } catch (IOException e) {
 //                                    e.printStackTrace();
-                                    continue ;
+                                    continue;
                                 }
                                 String[] splits = command.split("-");
                                 switch (splits[0]) {
@@ -356,8 +362,32 @@ class ProfileHandler extends Thread {
                                     case "unMute":
                                         Repository.getUserByUsername(splits[1]).unMute(Repository.getUserByUsername(splits[2]));
                                         break;
+                                    case "delete":
+                                        Repository.delete(splits[1]);
+                                        break;
+                                    case "edit":
+                                        try {
+                                            ObjectInputStream objectInputStream = new ObjectInputStream(dis);
+                                            Pack pack = (Pack) objectInputStream.readObject();
+                                            User user = (User) pack.nodes.get(0);
+                                            String fileName = (String) pack.nodes.get(1);
+                                            if (fileName != null){
+                                                byte[] image = user.getProfileImage();
+                                                new File("D:/College/AP/SBU Gram/src/server/res/" + user.getID()).mkdir();
+                                                new File("D:/College/AP/SBU Gram/src/server/res/" + user.getID() + "/" + fileName).createNewFile();
+                                                File file = new File("D:/College/AP/SBU Gram/src/server/res/" + user.getID() + "/" + fileName);
+                                                FileOutputStream fileOutputStream = new FileOutputStream(file);
+                                                fileOutputStream.write(image);
+                                                fileOutputStream.flush();
+                                            }
+                                            Repository.replace(user);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        break;
                                     case "exit": {
                                         try {
+                                            oos.close();
                                             dis.close();
                                             socket.close();
                                         } catch (IOException e) {

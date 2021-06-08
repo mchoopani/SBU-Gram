@@ -76,7 +76,8 @@ public class ProfileController {
         txt_birthday.setText(Properties.profile.getBirthday());
         txt_follower.setText("" + Properties.profile.getFollowers().size());
         txt_following.setText("" + Properties.profile.getFollowings().size());
-        img_prof.setFill(new ImagePattern(new Image(new ByteArrayInputStream(Properties.profile.getProfileImage()))));
+        if (Properties.profile.getProfileImage() != null)
+            img_prof.setFill(new ImagePattern(new Image(new ByteArrayInputStream(Properties.profile.getProfileImage()))));
         updateButtonsTexts();
 
 
@@ -146,9 +147,11 @@ public class ProfileController {
         updateButtonsTexts();
     }
 
-    public void editProfile(ActionEvent event) {
+    public void editProfile(ActionEvent event) throws IOException {
+        new PageLoader().load("editprofile_page");
     }
 
-    public void deleteAccount(ActionEvent event) {
+    public void deleteAccount(ActionEvent event) throws IOException {
+        ProfileModel.deleteAccount(Properties.user.getID());
     }
 }
