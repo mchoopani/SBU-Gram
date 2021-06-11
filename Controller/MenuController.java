@@ -22,10 +22,10 @@ public class MenuController {
 
     @FXML
     void logout(ActionEvent event) throws IOException {
-        Properties.user = null;
-        TimelineModel.disconnect();
+        TimelineModel.logout();
         new FileOutputStream("D:\\College\\AP\\SBU Gram\\src\\Temporary\\login_data.bin").close();
         new PageLoader().load("login_page");
+        Properties.user = null;
     }
 
     @FXML
@@ -46,5 +46,10 @@ public class MenuController {
         Properties.profile = Properties.user;
         new PageLoader().load("profile_page");
 
+    }
+
+    public void findPage(ActionEvent event) throws IOException {
+        TimelineModel.disconnect();
+        new PageLoader().load("search_page");
     }
 }

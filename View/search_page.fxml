@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SearchController">
+    <children>
+        <JFXTextField fx:id="filterField" layoutX="186.0" layoutY="72.0" prefHeight="26.0" prefWidth="332.0" style="-fx-text-inner-color: White;" unFocusColor="#e91e63" />
+        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+        <TableView onMouseClicked="#clickItem" fx:id="tableview" layoutX="74.0" layoutY="122.0" prefHeight="259.0" prefWidth="448.0">
+            <columns>
+                <TableColumn fx:id="name" prefWidth="147.60000610351562" text="Name" />
+                <TableColumn fx:id="username" prefWidth="141.59996032714844" text="Username" />
+                <TableColumn fx:id="address" prefWidth="140.4000244140625" text="Location" />
+            </columns>
+        </TableView>
+        <Label layoutX="82.0" layoutY="78.0" text="Find anybody:" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+      <Label layoutX="171.0" layoutY="24.0" text="Find Your Friends Here :)" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+        <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="6.0" layoutY="7.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/back.png" />
+         </image></ImageView>
+      <Label layoutX="440.0" layoutY="276.0" rotate="90.0" text="Double Click To See Profile..." textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

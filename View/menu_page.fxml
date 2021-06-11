@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #282c34;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MenuController">
+<AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #282c34;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MenuController">
    <children>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="113.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="114.46780395507812">
          <image>
@@ -18,22 +17,27 @@
             <Image url="@../images/close.png" />
          </image>
       </ImageView>
-      <JFXButton buttonType="RAISED" layoutX="156.0" layoutY="300.0" onAction="#openProfile" ripplerFill="WHITE" text="Profile" textFill="WHITE" AnchorPane.rightAnchor="158.4">
+      <JFXButton buttonType="RAISED" layoutX="156.0" layoutY="280.0" onAction="#openProfile" ripplerFill="WHITE" text="Profile" textFill="WHITE" AnchorPane.rightAnchor="158.4">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="127.0" layoutY="361.0" onAction="#openPV" ripplerFill="WHITE" text="Private Chats" textFill="WHITE" AnchorPane.rightAnchor="129.8">
+      <JFXButton buttonType="RAISED" layoutX="126.19999999999999" layoutY="341.0" onAction="#openPV" ripplerFill="WHITE" text="Private Chats" textFill="WHITE" AnchorPane.rightAnchor="129.8">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="143.0" layoutY="426.0" onAction="#newPost" ripplerFill="WHITE" text="New Post" textFill="WHITE" AnchorPane.rightAnchor="146.6">
+      <JFXButton buttonType="RAISED" layoutX="142.2" layoutY="406.0" onAction="#newPost" ripplerFill="WHITE" text="New Post" textFill="WHITE" AnchorPane.rightAnchor="146.60000000000002">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
       </JFXButton>
       <JFXButton buttonType="RAISED" layoutX="149.0" layoutY="545.0" onAction="#logout" ripplerFill="WHITE" text="Log Out" textFill="RED">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="132.0" layoutY="471.0" onAction="#findPage" ripplerFill="WHITE" text="Find Friends" textFill="WHITE">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>

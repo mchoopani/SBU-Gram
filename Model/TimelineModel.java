@@ -33,4 +33,9 @@ public class TimelineModel {
         dos.writeUTF("exit");
         dos.flush();
     }
+    public static void logout() throws IOException {
+        DataOutputStream dos = new DataOutputStream(currentOutputStream);
+        dos.writeUTF("logout-"+Properties.user.getID());
+        dos.flush();
+    }
 }

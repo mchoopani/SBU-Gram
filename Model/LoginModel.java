@@ -1,17 +1,12 @@
 package Model;
 
 import Controller.Properties;
-import Controller.TimelinePage;
-import Widgets.MyDialog;
 import bridges.Pack;
-import javafx.scene.layout.StackPane;
-
-import java.awt.event.MouseEvent;
 import java.io.*;
 import java.net.Socket;
 
 public class LoginModel {
-    public static boolean checkLoggedIn() throws IOException, ClassNotFoundException {
+    public static boolean checkLoggedIn() {
         try {
             File file = new File("D:\\College\\AP\\SBU Gram\\src\\Temporary\\login_data.bin");
             ObjectInputStream loadLoginData = new ObjectInputStream(new FileInputStream(file));

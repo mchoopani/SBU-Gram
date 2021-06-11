@@ -40,7 +40,8 @@ public class PostItemController {
         if (!post.getReferencePost().equals(post))
             root.setStyle("-fx-background-color: #263238;");
         liked = post.likedBefore(Properties.user.getID());
-        prof.setFill(new ImagePattern(new Image(new ByteArrayInputStream(post.getPublisher().getProfileImage()))));
+        if (post.getPublisher().getProfileImage()!=null)
+            prof.setFill(new ImagePattern(new Image(new ByteArrayInputStream(post.getPublisher().getProfileImage()))));
         txt_title.setText(post.getTitle());
         txt_name.setText(post.getReferencePost().getPublisher().getName());
         txt_text.setText(post.getText());

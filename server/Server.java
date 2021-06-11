@@ -9,10 +9,13 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Server {
-
+    public static void main(String[] args) throws IOException {
+        new Server().startUpServer();
+    }
     public void startUpServer() throws IOException {
         new LoginHandling(new ServerSocket(8080)).start();
         new SignupHandling(new ServerSocket(8081)).start();
@@ -21,6 +24,7 @@ public class Server {
         new AddPostHandler(new ServerSocket(8084)).start();
         new CommentHandler(new ServerSocket(8085)).start();
         new ProfileHandler(new ServerSocket(8086)).start();
+        new SearchUsersHandler(new ServerSocket(8087)).start();
     }
 }
 
@@ -46,6 +50,9 @@ class LoginHandling extends Thread {
                                 Pack output;
                                 if (Repository.userExists(UP[0], UP[1])) {
                                     output = new Pack("SUCCESSFULL", Repository.getUserByUsername(UP[0]));
+                                    System.err.printf("%s %s\ntime: %s\n", UP[0], "login", new Date().toString());
+                                    System.err.flush();
+                                    System.out.println("-----------------------------------------------");
                                 } else {
                                     output = new Pack("WRONG");
                                 }
@@ -113,6 +120,9 @@ class SignupHandling extends Thread {
                                     Repository.addUser(user);
                                     dos.writeUTF("Signup Completed.");
                                     dos.flush();
+                                    System.err.printf("%s %s %s\ntime: %s\n", user.getID(), "register", "D:/College/AP/SBU Gram/src/server/res/" + user.getID() + "/" + fileName, new Date().toString());
+                                    System.err.flush();
+                                    System.out.println("-----------------------------------------------");
                                 }
                             } catch (IOException | ClassNotFoundException e) {
                                 e.printStackTrace();
@@ -189,6 +199,9 @@ class Timeline extends Thread {
                 Pack pack = new Pack(posts);
                 oos.writeObject(pack);
                 oos.flush();
+                System.err.printf("%s %s\ntime: %s\n", username, "get posts list", new Date().toString());
+                System.err.flush();
+                System.out.println("-----------------------------------------------");
                 new Thread(
                         () -> {
                             Loop:
@@ -203,11 +216,31 @@ class Timeline extends Thread {
                                 String[] splits = command.split("-");
                                 switch (splits[0]) {
                                     case "like":
-                                        Repository.getPostById(splits[2]).like(splits[1]);
+                                        Post post0 = Repository.getPostById(splits[2]);
+                                        post0.like(splits[1]);
+                                        System.err.printf("%s %s\nmessage: %s %s\ntime: %s\n", splits[1], "like", splits[1], post0.getTitle(), new Date().toString());
+                                        System.err.flush();
+                                        System.out.println("-----------------------------------------------");
                                         break;
                                     case "unlike":
-                                        Repository.getPostById(splits[2]).unlike(splits[1]);
+                                        Post post1 = Repository.getPostById(splits[2]);
+                                        post1.unlike(splits[1]);
+                                        System.err.printf("%s %s\nmessage: %s %s\ntime: %s\n", splits[1], "unlike", splits[1], post1.getTitle(), new Date().toString());
+                                        System.err.flush();
+                                        System.out.println("-----------------------------------------------");
                                         break;
+                                    case "logout":
+                                        System.err.printf("%s %s\ntime: %s\n", splits[1], "logout", new Date().toString());
+                                        System.err.flush();
+                                        System.out.println("-----------------------------------------------");
+                                        try {
+                                            oos.close();
+                                            dis.close();
+                                            socket.close();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        break Loop;
                                     case "exit": {
                                         try {
                                             dis.close();
@@ -264,11 +297,18 @@ class AddPostHandler extends Thread {
                     Post reference = Repository.getPostById((String) pack.nodes.get(5));
                     reference.addReposts();
                     post.setReferencePost(reference);
+                    System.err.printf("%s %s\nmessage: %s %s\ntime: %s\n", publisherName, "repost", publisherName, post.getTitle(), new Date().toString());
+                    System.err.flush();
+                    System.out.println("-----------------------------------------------");
+
+                } else {
+                    System.err.printf("%s %s\nmessage: %s %s %s\ntime: %s\n", publisherName, "publish", title, "null", publisherName, new Date().toString());
+                    System.err.flush();
+                    System.out.println("-----------------------------------------------");
 
                 }
                 post.setImage(image);
                 Repository.addPost(post);
-                System.out.println("New Post Added");
             }).start();
         }
     }
@@ -291,7 +331,11 @@ class CommentHandler extends Thread {
                 Pack pack = (Pack) ois.readObject();
                 Comment comment = (Comment) pack.nodes.get(0);
                 long id = (long) pack.nodes.get(1);
-                Repository.getPostById(id + "").addComment(comment);
+                Post post = Repository.getPostById(id + "");
+                post.addComment(comment);
+                System.err.printf("%s %s\nmessage: %s\ntime: %s\n", comment.getSenderUsername(), "comment", post.getTitle() , new Date().toString());
+                System.err.flush();
+                System.out.println("-----------------------------------------------");
             }
 
         } catch (IOException | ClassNotFoundException e) {
@@ -323,6 +367,10 @@ class ProfileHandler extends Thread {
                                 Pack pack = new Pack(posts);
                                 oos.writeObject(pack);
                                 oos.flush();
+                                System.err.printf("%s %s %s\nmessage: %s %s\ntime: %s\n", username , "get info", "target_username(TODO)","target_username(TODO)","profile", new Date().toString());
+                                System.err.flush();
+                                System.out.println("-----------------------------------------------");
+
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -338,32 +386,61 @@ class ProfileHandler extends Thread {
                                 String[] splits = command.split("-");
                                 switch (splits[0]) {
                                     case "like":
-                                        Repository.getPostById(splits[2]).like(splits[1]);
+                                        Post post0 = Repository.getPostById(splits[2]);
+                                        post0.like(splits[1]);
+                                        System.err.printf("%s %s\nmessage: %s %s\ntime: %s\n", splits[1], "like", splits[1], post0.getTitle(), new Date().toString());
+                                        System.err.flush();
+                                        System.out.println("-----------------------------------------------");
                                         break;
                                     case "unlike":
-                                        Repository.getPostById(splits[2]).unlike(splits[1]);
+                                        Post post1 = Repository.getPostById(splits[2]);
+                                        post1.unlike(splits[1]);
+                                        System.err.printf("%s %s\nmessage: %s %s\ntime: %s\n", splits[1], "unlike", splits[1], post1.getTitle(), new Date().toString());
+                                        System.err.flush();
+                                        System.out.println("-----------------------------------------------");
                                         break;
                                     case "follow":
                                         Repository.getUserByUsername(splits[1]).follow(Repository.getUserByUsername(splits[2]));
                                         System.out.println("Follow");
+                                        System.err.printf("%s %s\nmessage: %s\ntime: %s\n", splits[1], "follow", splits[2], new Date().toString());
+                                        System.err.flush();
+                                        System.out.println("-----------------------------------------------");
                                         break;
                                     case "unFollow":
                                         Repository.getUserByUsername(splits[1]).unFollow(Repository.getUserByUsername(splits[2]));
+                                        System.err.printf("%s %s\nmessage: %s\ntime: %s\n", splits[1], "unfollow", splits[2], new Date().toString());
+                                        System.err.flush();
+                                        System.out.println("-----------------------------------------------");
                                         break;
                                     case "block":
                                         Repository.getUserByUsername(splits[1]).block(Repository.getUserByUsername(splits[2]));
+                                        System.err.printf("%s %s\nmessage: %s\ntime: %s\n", splits[1], "block", splits[2], new Date().toString());
+                                        System.err.flush();
+                                        System.out.println("-----------------------------------------------");
                                         break;
                                     case "unBlock":
                                         Repository.getUserByUsername(splits[1]).unBlock(Repository.getUserByUsername(splits[2]));
+                                        System.err.printf("%s %s\nmessage: %s\ntime: %s\n", splits[1], "unblock", splits[2], new Date().toString());
+                                        System.err.flush();
+                                        System.out.println("-----------------------------------------------");
                                         break;
                                     case "mute":
                                         Repository.getUserByUsername(splits[1]).mute(Repository.getUserByUsername(splits[2]));
+                                        System.err.printf("%s %s\nmessage: %s\ntime: %s\n", splits[1], "mute", splits[2], new Date().toString());
+                                        System.err.flush();
+                                        System.out.println("-----------------------------------------------");
                                         break;
                                     case "unMute":
                                         Repository.getUserByUsername(splits[1]).unMute(Repository.getUserByUsername(splits[2]));
+                                        System.err.printf("%s %s\nmessage: %s\ntime: %s\n", splits[1], "unMute", splits[2], new Date().toString());
+                                        System.err.flush();
+                                        System.out.println("-----------------------------------------------");
                                         break;
                                     case "delete":
                                         Repository.delete(splits[1]);
+                                        System.err.printf("%s %s\ntime: %s\n", splits[1], "delete account", new Date().toString());
+                                        System.err.flush();
+                                        System.out.println("-----------------------------------------------");
                                         break;
                                     case "edit":
                                         try {
@@ -371,7 +448,7 @@ class ProfileHandler extends Thread {
                                             Pack pack = (Pack) objectInputStream.readObject();
                                             User user = (User) pack.nodes.get(0);
                                             String fileName = (String) pack.nodes.get(1);
-                                            if (fileName != null){
+                                            if (fileName != null) {
                                                 byte[] image = user.getProfileImage();
                                                 new File("D:/College/AP/SBU Gram/src/server/res/" + user.getID()).mkdir();
                                                 new File("D:/College/AP/SBU Gram/src/server/res/" + user.getID() + "/" + fileName).createNewFile();
@@ -379,6 +456,9 @@ class ProfileHandler extends Thread {
                                                 FileOutputStream fileOutputStream = new FileOutputStream(file);
                                                 fileOutputStream.write(image);
                                                 fileOutputStream.flush();
+                                                System.err.printf("%s %s\nmessage: %s\ntime: %s\n", splits[1], "update info", "D:/College/AP/SBU Gram/src/server/res/" + user.getID() + "/" + fileName, new Date().toString());
+                                                System.err.flush();
+                                                System.out.println("-----------------------------------------------");
                                             }
                                             Repository.replace(user);
                                         } catch (Exception e) {
@@ -399,6 +479,36 @@ class ProfileHandler extends Thread {
                             }
                         }
                 ).start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+class SearchUsersHandler extends Thread {
+    ServerSocket serverSocket;
+
+    public SearchUsersHandler(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                Socket socket = serverSocket.accept();
+                new Thread(() -> {
+                    try {
+                        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+                        oos.writeObject(Repository.getUsers());
+                        socket.close();
+                        oos.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

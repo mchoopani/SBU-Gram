@@ -53,10 +53,11 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
-        new Server().startUpServer();
-        call();
+//        new Server().startUpServer();
+//        call();
         PageLoader.initStage(primaryStage);
         boolean hasLogin = LoginModel.checkLoggedIn();
+//        new PageLoader().load("search_page");
         if (hasLogin)
             new PageLoader().load("timeline_page");
         else

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="sign_sp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="408.0" minWidth="716.0" prefHeight="408.0" prefWidth="716.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EditProfileController">
+    <AnchorPane>
+        <JFXTextField fx:id="txt_name" focusColor="WHITE" layoutX="-127.0" layoutY="-181.0" prefHeight="44.0" prefWidth="206.0" promptText="Name" style="-fx-text-inner-color: White;" translateX="200" translateY="200" unFocusColor="#e91e63">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </JFXTextField>
+        <JFXPasswordField fx:id="txt_pass1" focusColor="WHITE" layoutX="73.0" layoutY="223.0" prefHeight="44.0" prefWidth="206.0" promptText="Password" style="-fx-text-inner-color: white;" unFocusColor="#e91e63">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </JFXPasswordField>
+        <JFXPasswordField fx:id="txt_pass2" focusColor="WHITE" layoutX="73.0" layoutY="281.0" prefHeight="44.0" prefWidth="206.0" promptText="Password again" style="-fx-text-inner-color: white;" unFocusColor="#e91e63">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </JFXPasswordField>
+        <JFXTextField fx:id="txt_recovery" focusColor="WHITE" layoutX="443.0" layoutY="281.0" prefHeight="44.0" prefWidth="206.0" promptText="ex) Mother" style="-fx-text-inner-color: White;" unFocusColor="#e91e63">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </JFXTextField>
+
+        <ImageView fx:id="img_profile" fitHeight="183.0" fitWidth="184.0" layoutX="451.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../nullprof.jpg" />
+            </image>
+        </ImageView>
+        <Label layoutX="451.0" layoutY="19.0" text="Profile Photo" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="31.0" fitWidth="30.0" layoutX="614.0" layoutY="193.0" onMouseClicked="#attach" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/attach.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="6.0" layoutY="7.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/back.png" />
+            </image>
+        </ImageView>
+        <JFXTextField fx:id="txt_year" focusColor="WHITE" layoutX="73.0" layoutY="77.0" prefHeight="44.0" prefWidth="85.0" promptText="Birthyear" style="-fx-text-inner-color: White;" unFocusColor="#2196f3">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </JFXTextField>
+        <JFXTextField fx:id="txt_month" focusColor="WHITE" layoutX="177.0" layoutY="77.0" prefHeight="44.0" prefWidth="43.0" promptText="Month" style="-fx-text-inner-color: White;" unFocusColor="#2196f3">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </JFXTextField>
+        <JFXTextField fx:id="txt_day" focusColor="WHITE" layoutX="235.0" layoutY="77.0" prefHeight="44.0" prefWidth="43.0" promptText="Day" style="-fx-text-inner-color: White;" unFocusColor="#2196f3">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </JFXTextField>
+        <Label layoutX="407.0" layoutY="236.0" prefHeight="44.0" prefWidth="279.0" text="Enter a word that when you hear it, be happy (for password recovery)" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+
+        <JFXTextField fx:id="txt_country" focusColor="WHITE" layoutX="312.0" layoutY="19.0" prefHeight="44.0" prefWidth="92.0" promptText="Country" style="-fx-text-inner-color: White;" unFocusColor="#2196f3">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </JFXTextField>
+        <JFXTextField fx:id="txt_city" focusColor="WHITE" layoutX="312.0" layoutY="77.0" prefHeight="44.0" prefWidth="92.0" promptText="City" style="-fx-text-inner-color: White;" unFocusColor="#2196f3">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </JFXTextField>
+        <JFXTextField fx:id="txt_job" focusColor="WHITE" layoutX="315.0" layoutY="149.0" prefHeight="44.0" prefWidth="92.0" promptText="Job" style="-fx-text-inner-color: White;" unFocusColor="#2196f3">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </JFXTextField>
+        <JFXButton layoutX="281.0" layoutY="355.0" onAction="#edit" prefHeight="38.0" prefWidth="154.0" ripplerFill="WHITE" style="-fx-background-color: #e91e63;" text="Edit Account" textFill="WHITE">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXButton>
+        <Label layoutX="73.0" layoutY="355.0" text="Necessary" textFill="#e91e63">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <Label layoutX="73.0" layoutY="374.0" text="!Necessary" textFill="#2196f3">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+      <Label fx:id="lbl_username" layoutY="85.0" rotate="90.0" text="\@Username" textFill="WHITE" AnchorPane.leftAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_oldpass" focusColor="WHITE" layoutX="74.0" layoutY="149.0" prefHeight="44.0" prefWidth="206.0" promptText="Old Password" style="-fx-text-inner-color: White;" unFocusColor="#e91e63">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXTextField>
+    </AnchorPane>
+
+</StackPane>
