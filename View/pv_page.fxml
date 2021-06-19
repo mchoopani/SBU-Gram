@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PVController">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #282C34;">
+         <children>
+            <HBox prefHeight="0.0" prefWidth="400.0" style="-fx-background-color: #282C34;">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="6.0" layoutY="7.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/back.png" />
+                     </image>
+                  </ImageView>
+                  <HBox alignment="TOP_CENTER" prefHeight="43.0" prefWidth="360.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="188.0" text="Chat With: " textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="188.0" text="Mahmood" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <ListView fx:id="messageList" prefHeight="499.0" prefWidth="450.0" style="-fx-background-color: #282C34; -fx-control-inner-background: #282C34;" />
+            <AnchorPane prefHeight="102.0" prefWidth="449.0" style="-fx-background-color: #282C34;">
+               <children>
+                  <JFXTextArea fx:id="txt_msg" labelFloat="true" prefHeight="102.0" prefWidth="448.0" promptText="Write here..." style="-fx-background-color: #282C40; -fx-text-inner-color: #ffffff;" wrapText="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font></JFXTextArea>
+                  <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="402.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#back">
+                     <image>
+                        <Image url="@../images/send.png" />
+                     </image>
+                  </ImageView>
+                  <Button layoutX="402.0" layoutY="51.0" mnemonicParsing="false" onAction="#send" opacity="0.0" prefHeight="46.0" prefWidth="39.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

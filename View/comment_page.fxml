@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTextArea?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-
-<HBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CommentController">
+<HBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CommentController">
    <children>
         <VBox alignment="CENTER" style="-fx-background-color: #282c34;">
             <children>
@@ -74,7 +69,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <ListView fx:id="commentList" prefWidth="400.0" style="-fx-background-color: #282c34;" />
+            <ListView fx:id="commentList" prefWidth="400.0" style="-fx-background-color: #282c34; -fx-control-inner-background: #282c34;" />
          </children>
       </VBox>
       <AnchorPane prefHeight="25.0" prefWidth="400.0" style="-fx-background-color: #282c34;">

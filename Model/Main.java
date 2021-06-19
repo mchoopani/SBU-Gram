@@ -2,6 +2,7 @@ package Model;
 
 import Controller.Properties;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import server.Repository;
 import server.Server;

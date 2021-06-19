@@ -1,10 +1,8 @@
 package Controller;
 
-import Model.PageLoader;
-import Model.Post;
-import Model.ProfileModel;
-import Model.TimelineModel;
+import Model.*;
 import Widgets.MyDialog;
+import bridges.Pack;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -44,6 +42,8 @@ public class ProfileController {
 
     @FXML
     public void initialize() throws IOException, ClassNotFoundException {
+        Pack pack = ProfileModel.connect();
+        Properties.profile = (User) pack.nodes.get(1);
         if (Properties.profile.isBlock(Properties.user)){
             new MyDialog(stackPane, "#f50057")
                     .setTitle("Error!", "#e5c07b")
@@ -61,7 +61,7 @@ public class ProfileController {
                     .show();
         }
         Properties.isInProfilePage = true;
-        posts = (List<Post>) ProfileModel.connect().nodes.get(0);
+        posts = (List<Post>) pack.nodes.get(0);
 
         //initialize posts array list to be shown in list view
         //show the post array in list view
@@ -153,5 +153,10 @@ public class ProfileController {
 
     public void deleteAccount(ActionEvent event) throws IOException {
         ProfileModel.deleteAccount(Properties.user.getID());
+        new PageLoader().load("login_page");
+    }
+    public void startPV(ActionEvent e) throws IOException {
+        ProfileModel.startPV();
+        new PageLoader().load("pv_page");
     }
 }

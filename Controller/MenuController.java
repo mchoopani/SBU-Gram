@@ -36,8 +36,8 @@ public class MenuController {
 
     @FXML
     void openPV(ActionEvent event) throws IOException {
+        new PageLoader().load("chat_page");
         TimelineModel.disconnect();
-
     }
 
     @FXML

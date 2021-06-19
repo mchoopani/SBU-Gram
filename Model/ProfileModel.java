@@ -78,6 +78,8 @@ public class ProfileModel {
         DataOutputStream dos = new DataOutputStream(currentOutputStream);
         dos.writeUTF("delete-"+id);
         dos.flush();
-        new PageLoader().load("login_page");
+    }
+    public static void startPV() throws IOException {
+        ChatModel.goToChat();
     }
 }

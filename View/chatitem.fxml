@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="370.0" style="-fx-background-color: #17212b;">
+         <children>
+            <Circle fx:id="img_profile" fill="WHITE" radius="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Circle>
+            <VBox prefHeight="200.0" prefWidth="300.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label fx:id="lbl_name" prefWidth="200.0" text="Mahmood" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="30.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbl_date" contentDisplay="RIGHT" prefHeight="44.0" prefWidth="82.0" text="12:12" textFill="#acacac" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="lbl_text" text="Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups" textAlignment="JUSTIFY" textFill="WHITE" wrapText="true" />
+               </children>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <Button onMouseClicked="#onChatItemClick" mnemonicParsing="false" opacity="0.0" prefHeight="100.0" prefWidth="370.0" />
+   </children>
+</AnchorPane>

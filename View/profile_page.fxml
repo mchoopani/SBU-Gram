@@ -8,7 +8,6 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-
 <StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProfileController">
    <children>
       <AnchorPane prefHeight="700.0" prefWidth="400.0" style="-fx-background-color: #282c34;">
@@ -110,6 +109,11 @@
                      <children>
                         <HBox fx:id="hisProfile" alignment="CENTER" prefHeight="40.0" prefWidth="382.0" spacing="5.0">
                            <children>
+                              <JFXButton layoutX="48.0" layoutY="10.0" onAction="#startPV" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #303f9f;" text="PV" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXButton>
                               <JFXButton fx:id="btn_follow" onAction="#follow" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #303f9f;" text="Follow" textFill="WHITE">
                                  <font>
                                     <Font size="18.0" />
@@ -158,7 +162,7 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <ListView fx:id="postList" prefWidth="382.0">
+                  <ListView fx:id="postList" prefWidth="382.0" style="-fx-background-color: #282C34; -fx-control-inner-background: #282C34;">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>

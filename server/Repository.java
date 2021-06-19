@@ -1,5 +1,6 @@
 package server;
 
+import Model.Chat;
 import Model.Post;
 import Model.User;
 
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 public class Repository {
     public static Vector<Post> posts = new Vector<>();
     private static Vector<User> users = new Vector<>();
+    private static Vector<Chat> chats = new Vector<>();
 
     public static void addPost(Post post) {
         posts.add(post);
@@ -96,5 +98,26 @@ public class Repository {
             user.getFollowers().remove(toDeleteUser);
         }
         users.remove(toDeleteUser);
+    }
+
+    public static ArrayList<Chat> collectChats (User user){
+        return (ArrayList<Chat>) chats.stream().filter(chat -> chat.hasPV(user)).collect(Collectors.toList());
+    }
+    public static Chat createChatIfNotExist(String username1, String username2){
+        User user1 = getUserByUsername(username1);
+        User user2 = getUserByUsername(username2);
+        for (Chat chat : chats)
+            if (chat.hasPV(user1) && chat.hasPV(user2))
+                return chat;
+        Chat newChat = new Chat(user1,user2);
+        chats.add(newChat);
+        return newChat;
+    }
+    public static Chat getChatById(String id){
+        for (Chat chat : chats){
+            if (chat.getId().equals(id))
+                return chat;
+        }
+        return null;
     }
 }

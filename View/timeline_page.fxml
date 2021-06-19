@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="400.0" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #443c4b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TimelinePage">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="400.0" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TimelinePage">
     <children>
         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #282C34;">
             <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="6.0" layoutY="7.0" onMouseClicked="#menu" pickOnBounds="true" preserveRatio="true">
@@ -23,6 +23,6 @@
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
         </HBox>
-        <ListView fx:id="postList" maxWidth="1.7976931348623157E308" onMouseClicked="#onClick" prefHeight="600.0" style="-fx-background-color: #282C34;" />
+        <ListView fx:id="postList" maxWidth="1.7976931348623157E308" onMouseClicked="#onClick" prefHeight="600.0" style="-fx-background-color: #282C34; -fx-control-inner-background: #282C34;" />
     </children>
 </VBox>

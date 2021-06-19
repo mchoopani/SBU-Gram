@@ -1,5 +1,6 @@
 package server;
 
+import Model.Chat;
 import Model.Comment;
 import Model.Post;
 import bridges.Pack;
@@ -14,8 +15,50 @@ import java.util.List;
 
 public class Server {
     public static void main(String[] args) throws IOException {
+        call();
         new Server().startUpServer();
     }
+
+    public static void call() throws IOException {
+        User u1 = new User("1001", "Ali", "1234", "");
+        u1.setProfileImage(new FileInputStream("D:\\New folder\\10.jpg").readAllBytes());
+        User u2 = new User("1002", "Hasan", "1234", "");
+        u2.setProfileImage(new FileInputStream("D:\\New folder\\11.jpg").readAllBytes());
+        User u0 = new User("1003", "Shahrzad", "1234", "");
+        u0.setProfileImage(new FileInputStream("D:\\New folder\\12.jpg").readAllBytes());
+        User u3 = new User("1004", "Reza", "1234", "");
+        u3.setProfileImage(new FileInputStream("D:\\New folder\\13.jpg").readAllBytes());
+        User u5 = new User("1005", "Mahmood", "1234", "");
+        u5.setProfileImage(new FileInputStream("D:\\New folder\\14.jpg").readAllBytes());
+        u5.addFollowing(u1);
+        User u4 = new User("1006", "Goli", "1234", "");
+        u4.setProfileImage(new FileInputStream("D:\\New folder\\23.jpg").readAllBytes());
+        u4.addFollowing(u4);
+        User u7 = new User("1007", "1234", "1234", "");
+        u7.setProfileImage(new FileInputStream("D:\\New folder\\24.jpg").readAllBytes());
+        u7.addFollowing(u1);
+        u7.addFollowing(u5);
+        u1.follow(u5);
+        Repository.addUser(u0);
+        Repository.addUser(u1);
+        Repository.addUser(u2);
+        Repository.addUser(u3);
+        Repository.addUser(u4);
+        Repository.addUser(u5);
+        Repository.addUser(u7);
+        Post p1 = new Post("T1", "Ali1", Repository.getUserByUsername("1001"));
+        p1.setImage(new FileInputStream("D:\\New folder\\1.jpeg").readAllBytes());
+        p1.addComment(new Comment(u0, "Ridi ke"));
+        p1.addComment(new Comment(u0, "Madar be khata"));
+        Post p2 = new Post("T2", "Ali2", Repository.getUserByUsername("1001"));
+        p2.setImage(new FileInputStream("D:\\New folder\\4.jpeg").readAllBytes());
+        Post p3 = new Post("T3", "Mahmood", Repository.getUserByUsername("1005"));
+        p3.setImage(new FileInputStream("D:\\New folder\\3.jpeg").readAllBytes());
+        Repository.addPost(p1);
+        Repository.addPost(p2);
+        Repository.addPost(p3);
+    }
+
     public void startUpServer() throws IOException {
         new LoginHandling(new ServerSocket(8080)).start();
         new SignupHandling(new ServerSocket(8081)).start();
@@ -25,6 +68,7 @@ public class Server {
         new CommentHandler(new ServerSocket(8085)).start();
         new ProfileHandler(new ServerSocket(8086)).start();
         new SearchUsersHandler(new ServerSocket(8087)).start();
+        new ChatHandler(new ServerSocket(8088)).start();
     }
 }
 
@@ -333,7 +377,7 @@ class CommentHandler extends Thread {
                 long id = (long) pack.nodes.get(1);
                 Post post = Repository.getPostById(id + "");
                 post.addComment(comment);
-                System.err.printf("%s %s\nmessage: %s\ntime: %s\n", comment.getSenderUsername(), "comment", post.getTitle() , new Date().toString());
+                System.err.printf("%s %s\nmessage: %s\ntime: %s\n", comment.getSenderUsername(), "comment", post.getTitle(), new Date().toString());
                 System.err.flush();
                 System.out.println("-----------------------------------------------");
             }
@@ -364,10 +408,11 @@ class ProfileHandler extends Thread {
                             try {
                                 String username = dis.readUTF();
                                 ArrayList<Post> posts = Repository.getUserPosts(username);
-                                Pack pack = new Pack(posts);
+                                User user = Repository.getUserByUsername(username);
+                                Pack pack = new Pack(posts,user);
                                 oos.writeObject(pack);
                                 oos.flush();
-                                System.err.printf("%s %s %s\nmessage: %s %s\ntime: %s\n", username , "get info", "target_username(TODO)","target_username(TODO)","profile", new Date().toString());
+                                System.err.printf("%s %s %s\nmessage: %s %s\ntime: %s\n", username, "get info", "target_username(TODO)", "target_username(TODO)", "profile", new Date().toString());
                                 System.err.flush();
                                 System.out.println("-----------------------------------------------");
 
@@ -456,7 +501,7 @@ class ProfileHandler extends Thread {
                                                 FileOutputStream fileOutputStream = new FileOutputStream(file);
                                                 fileOutputStream.write(image);
                                                 fileOutputStream.flush();
-                                                System.err.printf("%s %s\nmessage: %s\ntime: %s\n", splits[1], "update info", "D:/College/AP/SBU Gram/src/server/res/" + user.getID() + "/" + fileName, new Date().toString());
+                                                System.err.printf("%s %s\nmessage: %s\ntime: %s\n", user.getID(), "update info", "D:/College/AP/SBU Gram/src/server/res/" + user.getID() + "/" + fileName, new Date().toString());
                                                 System.err.flush();
                                                 System.out.println("-----------------------------------------------");
                                             }
@@ -510,6 +555,94 @@ class SearchUsersHandler extends Thread {
                 }).start();
 
             } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+class ChatHandler extends Thread {
+    ServerSocket serverSocket;
+
+    public ChatHandler(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                Socket socket = serverSocket.accept();
+                ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+
+                new Thread(
+                        () -> {
+                            try {
+                                String command = ois.readUTF();
+                                switch (command) {
+                                    case "get": {
+                                        String username = ois.readUTF();
+                                        ArrayList<Chat> chats = Repository.collectChats(Repository.getUserByUsername(username));
+                                        oos.writeObject((ArrayList<Chat>) chats);
+                                        oos.flush();
+                                        String anotherCommand = ois.readUTF();
+                                        switch (anotherCommand) {
+                                            case "start": {
+                                                String usernames = ois.readUTF();
+                                                Chat chat = Repository.createChatIfNotExist(usernames.split("-")[0], usernames.split("-")[1]);
+                                                new Thread(
+                                                        () -> {
+                                                            try {
+                                                                chat.injectChat(socket);
+                                                            } catch (IOException | ClassNotFoundException e) {
+                                                                e.printStackTrace();
+                                                            }
+                                                        }
+                                                ).start();
+                                            }
+                                            break;
+                                        }
+                                    }
+                                    break;
+                                    case "chat": {
+                                        String chatID = ois.readUTF();
+                                        Chat chat = Repository.getChatById(chatID);
+                                        oos.writeObject(chat);
+                                        new Thread(
+                                                () -> {
+                                                    try {
+                                                        chat.injectChat(socket);
+                                                    } catch (IOException | ClassNotFoundException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                        ).start();
+                                    }
+                                    break;
+                                    case "start": {
+                                        String usernames = ois.readUTF();
+                                        Chat chat = Repository.createChatIfNotExist(usernames.split("-")[0], usernames.split("-")[1]);
+                                        new Thread(
+                                                () -> {
+                                                    try {
+                                                        chat.injectChat(socket);
+                                                    } catch (IOException | ClassNotFoundException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                        ).start();
+                                    }
+                                    break;
+                                }
+
+                            } catch (EOFException ignored) {
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                ).start();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
