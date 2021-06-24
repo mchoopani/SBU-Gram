@@ -48,4 +48,16 @@ public class PVModel {
         oos.writeObject(new Message(message, Properties.user) );
         oos.flush();
     }
+    public static void sendMessage(String message,byte[] image) throws IOException {
+        oos.writeObject(new PhotoMessage(message, Properties.user,image) );
+        oos.flush();
+    }
+    public static void sendMessage(String message,byte[] audio,String filename) throws IOException {
+        oos.writeObject(new AudioMessage(message, Properties.user,audio,filename) );
+        oos.flush();
+    }
+    public static void sendMessage(Message message,String mode) throws IOException {
+        oos.writeObject(message);
+        oos.flush();
+    }
 }

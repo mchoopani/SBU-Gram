@@ -45,7 +45,7 @@ public class MenuController {
         TimelineModel.disconnect();
         Properties.profile = Properties.user;
         new PageLoader().load("profile_page");
-
+        Properties.lastPage = "menu_page";
     }
 
     public void findPage(ActionEvent event) throws IOException {

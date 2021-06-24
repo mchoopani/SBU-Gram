@@ -24,7 +24,7 @@
                               <Font name="System Bold" size="30.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbl_date" contentDisplay="RIGHT" prefHeight="44.0" prefWidth="82.0" text="12:12" textFill="#acacac" />
+                        <Label fx:id="lbl_date" alignment="CENTER" contentDisplay="CENTER" prefHeight="44.0" prefWidth="82.0" text="12:12" textFill="#acacac" wrapText="true" />
                      </children>
                   </HBox>
                   <Label fx:id="lbl_text" text="Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups" textAlignment="JUSTIFY" textFill="WHITE" wrapText="true" />
@@ -35,6 +35,10 @@
             </VBox>
          </children>
       </HBox>
-      <Button onMouseClicked="#onChatItemClick" mnemonicParsing="false" opacity="0.0" prefHeight="100.0" prefWidth="370.0" />
+      <Button mnemonicParsing="false" onMouseClicked="#onChatItemClick" opacity="0.0" prefHeight="100.0" prefWidth="370.0" />
+      <Label fx:id="lbl_notSeen" contentDisplay="CENTER" layoutX="2.0" layoutY="-1.0" text="0" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font></Label>
    </children>
 </AnchorPane>

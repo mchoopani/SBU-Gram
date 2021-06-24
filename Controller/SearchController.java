@@ -42,7 +42,7 @@ public class SearchController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        Properties.lastPage = "search_page";
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         username.setCellValueFactory(new PropertyValueFactory<>("ID"));
         address.setCellValueFactory(new PropertyValueFactory<>("address"));

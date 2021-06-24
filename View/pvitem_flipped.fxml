@@ -18,7 +18,7 @@
             <VBox layoutX="14.0" layoutY="5.0" nodeOrientation="LEFT_TO_RIGHT">
                <children>
                   <Label fx:id="lbl_date" text="12:12" textFill="#d5d5d5" />
-                  <Label fx:id="lbl_message" prefHeight="26.0" prefWidth="240.0" text="Hello..." textFill="WHITE" wrapText="true">
+                  <Label fx:id="lbl_message" prefWidth="240.0" text="Hello..." textFill="WHITE" wrapText="true">
                      <font>
                         <Font size="16.0" />
                      </font>

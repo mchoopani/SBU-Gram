@@ -31,6 +31,9 @@ public class ChatItemController {
 
     @FXML
     private Label lbl_text;
+
+
+    public Label lbl_notSeen;
     Chat chat;
 
     public ChatItemController(Chat chat) throws IOException {
@@ -43,15 +46,19 @@ public class ChatItemController {
         User companion = chat.getCompanion(Properties.user);
         lbl_name.setText(companion.getName());
         if (chat.getMessages().size() > 0)
-            lbl_text.setText(chat.getMessages().get(chat.getMessages().size()-1).getText());
+            lbl_text.setText(chat.getMessages().get(chat.getMessages().size() - 1).getText());
         else
             lbl_text.setText("Nothing...");
+        lbl_notSeen.setText(chat.getNotSeenMessageCount(Properties.user.getID()) + "");
+        lbl_date.setText(chat.getMessages().get(chat.getMessages().size()-1).getDate().toString());
         img_profile.setFill(new ImagePattern(new Image(new ByteArrayInputStream(companion.getProfileImage()))));
         return root;
     }
 
     public void onChatItemClick(MouseEvent e) throws IOException {
-        ChatModel.goToChat(chat.getCompanion(Properties.user).getID());
+        Properties.toShowChat = chat.getCompanion(Properties.user);
+        ChatModel.goToChat(Properties.toShowChat.getID());
+        Properties.lastPage = "chat_page";
         new PageLoader().load("pv_page");
     }
 }

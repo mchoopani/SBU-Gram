@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<HBox fx:id="root" nodeOrientation="LEFT_TO_RIGHT" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox>
+            <HBox.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </HBox.margin>
+            <children>
+                <Circle fx:id="img_profile" fill="DODGERBLUE" radius="26.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            </children>
+        </VBox>
+        <AnchorPane prefWidth="250.0" style="-fx-background-color: #182533; -fx-background-radius: 10;">
+            <children>
+                <VBox layoutX="14.0" layoutY="5.0" nodeOrientation="RIGHT_TO_LEFT">
+                    <children>
+                        <Label fx:id="lbl_date" text="12:12" textFill="#d5d5d5" />
+                  <ImageView fx:id="img_message" fitHeight="150.0" fitWidth="266.0" pickOnBounds="true" preserveRatio="true" />
+                  <AnchorPane nodeOrientation="LEFT_TO_RIGHT">
+                     <children>
+                              <Label fx:id="lbl_message" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutX="6.10351571594947E-6" prefWidth="261.0" text="Hi This is a test message like lorem but better than it" textFill="WHITE" wrapText="true">
+                                  <font>
+                                      <Font size="16.0" />
+                                  </font>
+                              </Label>
+                            <JFXTextArea fx:id="editBox" focusColor="#a8404000" prefHeight="52.0" prefWidth="267.0" style="-fx-text-inner-color: WHITE;" text="sdfsdfds" unFocusColor="#4f000000" visible="false" wrapText="true" />
+                     </children>
+                  </AnchorPane>
+                    </children>
+                    <padding>
+                        <Insets right="2.0" />
+                    </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+                </VBox>
+            </children>
+            <HBox.margin>
+                <Insets bottom="2.0" right="2.0" top="2.0" />
+            </HBox.margin>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+        </AnchorPane>
+    </children>
+</HBox>

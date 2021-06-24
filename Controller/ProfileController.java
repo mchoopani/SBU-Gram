@@ -44,7 +44,7 @@ public class ProfileController {
     public void initialize() throws IOException, ClassNotFoundException {
         Pack pack = ProfileModel.connect();
         Properties.profile = (User) pack.nodes.get(1);
-        if (Properties.profile.isBlock(Properties.user)){
+        if (Properties.profile.isBlock(Properties.user)) {
             new MyDialog(stackPane, "#f50057")
                     .setTitle("Error!", "#e5c07b")
                     .setMessage(Properties.profile.getName() + " Blocked You :("
@@ -95,7 +95,8 @@ public class ProfileController {
         }
 
     }
-    public void updateButtonsTexts(){
+
+    public void updateButtonsTexts() {
         if (Properties.user.isMute(Properties.profile))
             btn_mute.setText("UnMute");
         else
@@ -111,15 +112,18 @@ public class ProfileController {
     }
 
     public void back(MouseEvent mouseEvent) throws IOException {
-        new PageLoader().load("timeline_page");
+        if (Properties.lastPage.equals("profile_page"))
+            new PageLoader().load("timeline_page");
+        else
+            new PageLoader().load(Properties.lastPage);
     }
 
     public void follow(ActionEvent event) throws IOException {
         if (!Properties.user.isFollow(Properties.profile)) {
-            ProfileModel.follow(Properties.user.getID()+"",Properties.profile.getID()+"");
+            ProfileModel.follow(Properties.user.getID() + "", Properties.profile.getID() + "");
             Properties.user.follow(Properties.profile);
-        }else {
-            ProfileModel.unFollow(Properties.user.getID()+"",Properties.profile.getID()+"");
+        } else {
+            ProfileModel.unFollow(Properties.user.getID() + "", Properties.profile.getID() + "");
             Properties.user.unFollow(Properties.profile);
         }
         updateButtonsTexts();
@@ -127,10 +131,10 @@ public class ProfileController {
 
     public void block(ActionEvent event) throws IOException {
         if (!Properties.user.isBlock(Properties.profile)) {
-            ProfileModel.block(Properties.user.getID()+"",Properties.profile.getID()+"");
+            ProfileModel.block(Properties.user.getID() + "", Properties.profile.getID() + "");
             Properties.user.block(Properties.profile);
-        }else {
-            ProfileModel.unBlock(Properties.user.getID()+"",Properties.profile.getID()+"");
+        } else {
+            ProfileModel.unBlock(Properties.user.getID() + "", Properties.profile.getID() + "");
             Properties.user.unBlock(Properties.profile);
         }
         updateButtonsTexts();
@@ -138,10 +142,10 @@ public class ProfileController {
 
     public void mute(ActionEvent event) throws IOException {
         if (!Properties.user.isMute(Properties.profile)) {
-            ProfileModel.mute(Properties.user.getID()+"",Properties.profile.getID()+"");
+            ProfileModel.mute(Properties.user.getID() + "", Properties.profile.getID() + "");
             Properties.user.mute(Properties.profile);
-        }else {
-            ProfileModel.unMute(Properties.user.getID()+"",Properties.profile.getID()+"");
+        } else {
+            ProfileModel.unMute(Properties.user.getID() + "", Properties.profile.getID() + "");
             Properties.user.unMute(Properties.profile);
         }
         updateButtonsTexts();
@@ -149,14 +153,18 @@ public class ProfileController {
 
     public void editProfile(ActionEvent event) throws IOException {
         new PageLoader().load("editprofile_page");
+        Properties.lastPage = "profile_page";
     }
 
     public void deleteAccount(ActionEvent event) throws IOException {
         ProfileModel.deleteAccount(Properties.user.getID());
         new PageLoader().load("login_page");
     }
+
     public void startPV(ActionEvent e) throws IOException {
         ProfileModel.startPV();
+        Properties.toShowChat = Properties.profile;
+        Properties.lastPage = "profile_page";
         new PageLoader().load("pv_page");
     }
 }

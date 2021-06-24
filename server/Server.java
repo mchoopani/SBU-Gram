@@ -446,7 +446,6 @@ class ProfileHandler extends Thread {
                                         break;
                                     case "follow":
                                         Repository.getUserByUsername(splits[1]).follow(Repository.getUserByUsername(splits[2]));
-                                        System.out.println("Follow");
                                         System.err.printf("%s %s\nmessage: %s\ntime: %s\n", splits[1], "follow", splits[2], new Date().toString());
                                         System.err.flush();
                                         System.out.println("-----------------------------------------------");
@@ -594,7 +593,7 @@ class ChatHandler extends Thread {
                                                 new Thread(
                                                         () -> {
                                                             try {
-                                                                chat.injectChat(socket);
+                                                                chat.injectChat(socket,username);
                                                             } catch (IOException | ClassNotFoundException e) {
                                                                 e.printStackTrace();
                                                             }
@@ -612,7 +611,7 @@ class ChatHandler extends Thread {
                                         new Thread(
                                                 () -> {
                                                     try {
-                                                        chat.injectChat(socket);
+                                                        chat.injectChat(socket,chatID);
                                                     } catch (IOException | ClassNotFoundException e) {
                                                         e.printStackTrace();
                                                     }
@@ -626,7 +625,7 @@ class ChatHandler extends Thread {
                                         new Thread(
                                                 () -> {
                                                     try {
-                                                        chat.injectChat(socket);
+                                                        chat.injectChat(socket,usernames);
                                                     } catch (IOException | ClassNotFoundException e) {
                                                         e.printStackTrace();
                                                     }

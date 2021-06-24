@@ -157,8 +157,10 @@ public class User implements Serializable {
     }
     public void follow(User userToFollow){
         followings.add(userToFollow);
+        userToFollow.followers.add(this);
     }
     public void unFollow(User userToUnFollow){
         followings.remove(userToUnFollow);
+        userToUnFollow.followers.remove(this);
     }
 }

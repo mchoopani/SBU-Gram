@@ -22,7 +22,6 @@ public final class MyDialog {
     public MyDialog(StackPane stackpane , String backgroundHexColor){
         jfxDialogLayout = new JFXDialogLayout();
         jfxDialogLayout.setStyle("-fx-background-color: " + backgroundHexColor);
-
         this.stackpane = stackpane;
 
     }
@@ -66,6 +65,7 @@ public final class MyDialog {
         if (jfxButton.getOnAction() == null) {
             jfxButton.setOnAction(x->close());
         }
+        dialog.setOverlayClose(false);
         dialog.show();
     }
     public void close(){

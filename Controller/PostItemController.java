@@ -88,6 +88,8 @@ public class PostItemController {
     public void goToProfile(MouseEvent event) throws IOException {
         Properties.profile = post.getPublisher();
         new PageLoader().load("profile_page");
+        Properties.lastPage = "timeline_page";
+
     }
     public void repost(MouseEvent event) throws IOException {
         AddPostModel.sendPost(post.getTitle(),post.getText(),post.getImage(),Properties.user.getID(),true,post.getReferencePost().getId()+"");

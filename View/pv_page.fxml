@@ -28,7 +28,7 @@
                               <Font name="System Bold" size="21.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="188.0" text="Mahmood" textFill="WHITE">
+                        <Label fx:id="lbl_companion" alignment="CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="188.0" text="Mahmood" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
@@ -40,16 +40,22 @@
             <ListView fx:id="messageList" prefHeight="499.0" prefWidth="450.0" style="-fx-background-color: #282C34; -fx-control-inner-background: #282C34;" />
             <AnchorPane prefHeight="102.0" prefWidth="449.0" style="-fx-background-color: #282C34;">
                <children>
-                  <JFXTextArea fx:id="txt_msg" labelFloat="true" prefHeight="102.0" prefWidth="448.0" promptText="Write here..." style="-fx-background-color: #282C40; -fx-text-inner-color: #ffffff;" wrapText="true">
+                  <JFXTextArea fx:id="txt_msg" labelFloat="true" prefHeight="102.0" prefWidth="398.0" promptText="Write here..." style="-fx-background-color: #282C40; -fx-text-inner-color: #ffffff;" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font></JFXTextArea>
-                  <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="402.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#back">
+                  <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="402.0" layoutY="57.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/send.png" />
                      </image>
                   </ImageView>
                   <Button layoutX="402.0" layoutY="51.0" mnemonicParsing="false" onAction="#send" opacity="0.0" prefHeight="46.0" prefWidth="39.0" />
+                  <ImageView fx:id="img_attach" fitHeight="39.0" fitWidth="39.0" layoutX="402.0" layoutY="10.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/attach.png" />
+                     </image>
+                  </ImageView>
+                  <Button layoutX="402.0" layoutY="6.0" mnemonicParsing="false" onAction="#attach" opacity="0.0" prefHeight="46.0" prefWidth="39.0" />
                </children>
             </AnchorPane>
          </children>
