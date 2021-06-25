@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Repository {
-    public static Vector<Post> posts = new Vector<>();
+    private static Vector<Post> posts = new Vector<>();
     private static Vector<User> users = new Vector<>();
     private static Vector<Chat> chats = new Vector<>();
 
@@ -21,10 +21,10 @@ public class Repository {
 
     public static List<Post> getFollowingPosts(User responder) {
         return posts.stream()
-                .filter(post -> responder.getFollowings().contains(post.getPublisher()) &&
+                .filter(post -> (post.getPublisher().equals(responder)) || (responder.getFollowings().contains(post.getPublisher()) &&
                         !responder.isMute(post.getPublisher()) &&
                         !post.getPublisher().isBlock(responder) &&
-                        !responder.isBlock(post.getPublisher()))
+                        !responder.isBlock(post.getPublisher())))
                 .sorted((post1,post2)->-post1.getPublishDate().compareTo(post2.getPublishDate()))
                 .collect(Collectors.toList());
     }
@@ -55,8 +55,23 @@ public class Repository {
     public static boolean postExists(Post thisPost) {
         return exists(posts,thisPost);
     }
+    public static void setUsers(ArrayList<User> usersToAdd){
+        users.addAll(usersToAdd);
+    }
+    public static void setPosts(ArrayList<Post> postsToAdd){
+        posts.addAll(postsToAdd);
+    }
+    public static void setChats(ArrayList<Chat> chatsToAdd){
+        chats.addAll(chatsToAdd);
+    }
     public static ArrayList<User> getUsers() {
         return new ArrayList<>(users);
+    }
+    public static ArrayList<Post> getPosts(){
+        return new ArrayList<>(posts);
+    }
+    public static ArrayList<Chat> getChats(){
+        return new ArrayList<>(chats);
     }
     public static ArrayList<Post> getFollowingPosts(String username){
         User user = getUserByUsername(username);

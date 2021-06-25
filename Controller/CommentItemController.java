@@ -21,6 +21,7 @@ public class CommentItemController {
     public Label txt_name;
     public Label txt_comment;
     public Circle img_prof;
+
     public CommentItemController(Comment comment) throws IOException {
         new PageLoader().load("commentitem", this);
         this.comment = comment;
@@ -31,7 +32,8 @@ public class CommentItemController {
         txt_username.setText(comment.getSenderUsername());
         txt_name.setText(comment.getSenderName());
         txt_comment.setText(comment.getComment());
-        img_prof.setFill(new ImagePattern(new Image(new ByteArrayInputStream(comment.getSenderImage()))));
+        if (comment.getSenderImage() != null)
+            img_prof.setFill(new ImagePattern(new Image(new ByteArrayInputStream(comment.getSenderImage()))));
         return root;
     }
 }

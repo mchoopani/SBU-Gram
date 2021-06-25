@@ -15,7 +15,7 @@ public class ProfileModel {
         currentOutputStream = socket.getOutputStream();
         currentInputStream = socket.getInputStream();
         DataOutputStream dos = new DataOutputStream(currentOutputStream);
-        dos.writeUTF("" + Properties.profile.getID());
+        dos.writeUTF("" + Properties.profile.getID()+"-"+Properties.user.getID());
         dos.flush();
         return (Pack) new ObjectInputStream(currentInputStream).readObject();
     }

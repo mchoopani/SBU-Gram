@@ -109,7 +109,7 @@
                      <children>
                         <HBox fx:id="hisProfile" alignment="CENTER" prefHeight="40.0" prefWidth="382.0" spacing="5.0">
                            <children>
-                              <JFXButton layoutX="48.0" layoutY="10.0" onAction="#startPV" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #303f9f;" text="PV" textFill="WHITE">
+                              <JFXButton layoutX="48.0" layoutY="10.0" onAction="#startPV" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #9c27b0;" text="PV" textFill="WHITE">
                                  <font>
                                     <Font size="18.0" />
                                  </font>

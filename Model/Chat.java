@@ -7,9 +7,10 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Vector;
 
-public class Chat implements Serializable {
+public class Chat implements Serializable,Comparable<Chat> {
     private String id;
     private static int counter = 1;
     private User[] pair = new User[2];
@@ -43,6 +44,8 @@ public class Chat implements Serializable {
     public void injectChat(Socket socket,String usernames) throws IOException, ClassNotFoundException {
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+        if (outputs == null)
+            outputs = new Vector<>();
         outputs.add(oos);
         oos.writeObject(new ArrayList<>(messages));
         oos.flush();
@@ -65,11 +68,13 @@ public class Chat implements Serializable {
                 oos.flush();
                 continue;
             }
-            System.out.println("---- " + message.toString() + " ----");
             if (!messages.contains(message))
                 message.stickID();
             sendMessage(message);
             addMessage(message);
+            System.err.printf("%s send\nmessage: from %s to %s\ntime: %s\n",message.getSender().getID(),message.getSender().getName(),getCompanion(message.getSender()).getName(), new Date().toString());
+            System.err.flush();
+            System.out.println("-----------------------------------------------");
         }
         outputs.remove(oos);
     }
@@ -100,6 +105,9 @@ public class Chat implements Serializable {
                 e.printStackTrace();
             }
         }
+        System.err.printf("%s receive\nmessage: from %s\ntime: %s\n",message.getSender().getID(),getCompanion(message.getSender()).getName(), new Date().toString());
+        System.err.flush();
+        System.out.println("-----------------------------------------------");
     }
     public int getNotSeenMessageCount(String username){
         int sum = 0;
@@ -111,5 +119,9 @@ public class Chat implements Serializable {
     }
     public ArrayList<Message> getMessages() {
         return new ArrayList<>(messages);
+    }
+    @Override
+    public int compareTo(Chat o) {
+        return this.messages.get(messages.size()-1).getDate().compareTo(o.messages.get(o.messages.size()-1).getDate());
     }
 }

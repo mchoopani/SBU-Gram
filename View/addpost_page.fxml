@@ -5,35 +5,41 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #282c34;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddPostController">
-   <ImageView fx:id="postPhoto" fitHeight="252.0" fitWidth="322.0" layoutX="41.0" layoutY="338.0" pickOnBounds="true">
-      <image>
-         <Image url="@../noimage.png" />
-      </image>
-   </ImageView>
 
-    <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="6.0" layoutY="7.0" onMouseClicked="#back"
-               pickOnBounds="true" preserveRatio="true">
-        <image>
-            <Image url="@../images/back.png"/>
-        </image>
-    </ImageView>
-    <JFXTextField fx:id="txt_title" focusColor="#e91e63" layoutX="38.0" layoutY="42.0" prefHeight="26.0" prefWidth="322.0" promptText="Post Title" style="-fx-text-inner-color: white;" unFocusColor="WHITE">
-      <font>
-         <Font name="System Bold" size="24.0" />
-      </font></JFXTextField>
-    <ImageView fitHeight="31.0" fitWidth="30.0" layoutX="333.0" layoutY="365.0" onMouseClicked="#attach" pickOnBounds="true" preserveRatio="true">
-        <image>
-            <Image url="@../images/attach.png" />
-        </image>
-    </ImageView>
-    <JFXTextArea fx:id="txt_text" focusColor="#e91e63" layoutX="41.0" layoutY="139.0" prefHeight="186.0" prefWidth="321.0" promptText="Post Description" style="-fx-text-inner-color: white;" unFocusColor="WHITE">
-      <font>
-         <Font size="18.0" />
-      </font></JFXTextArea>
-   <ImageView fitHeight="62.0" fitWidth="68.0" layoutX="14.0" layoutY="524.0" onMouseClicked="#send" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/publish.png" />
-      </image>
-   </ImageView>
-</AnchorPane>
+<StackPane fx:id="stack" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddPostController">
+   <children>
+      <AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #282c34;">
+         <ImageView fx:id="postPhoto" fitHeight="252.0" fitWidth="322.0" layoutX="41.0" layoutY="338.0" pickOnBounds="true">
+            <image>
+               <Image url="@../noimage.png" />
+            </image>
+         </ImageView>
+      
+          <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="6.0" layoutY="7.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@../images/back.png" />
+              </image>
+          </ImageView>
+          <JFXTextField fx:id="txt_title" focusColor="#e91e63" layoutX="38.0" layoutY="42.0" prefHeight="26.0" prefWidth="322.0" promptText="Post Title" style="-fx-text-inner-color: white;" unFocusColor="WHITE">
+            <font>
+               <Font name="System Bold" size="24.0" />
+            </font>
+         </JFXTextField>
+          <ImageView fitHeight="31.0" fitWidth="30.0" layoutX="333.0" layoutY="365.0" onMouseClicked="#attach" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@../images/attach.png" />
+              </image>
+          </ImageView>
+          <JFXTextArea fx:id="txt_text" focusColor="#e91e63" layoutX="41.0" layoutY="139.0" prefHeight="186.0" prefWidth="321.0" promptText="Post Description" style="-fx-text-inner-color: white;" unFocusColor="WHITE">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </JFXTextArea>
+         <ImageView fitHeight="62.0" fitWidth="68.0" layoutX="14.0" layoutY="524.0" onMouseClicked="#send" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../images/publish.png" />
+            </image>
+         </ImageView>
+      </AnchorPane>
+   </children>
+</StackPane>

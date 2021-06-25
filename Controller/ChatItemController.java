@@ -50,8 +50,9 @@ public class ChatItemController {
         else
             lbl_text.setText("Nothing...");
         lbl_notSeen.setText(chat.getNotSeenMessageCount(Properties.user.getID()) + "");
-        lbl_date.setText(chat.getMessages().get(chat.getMessages().size()-1).getDate().toString());
-        img_profile.setFill(new ImagePattern(new Image(new ByteArrayInputStream(companion.getProfileImage()))));
+        lbl_date.setText(chat.getMessages().get(chat.getMessages().size() - 1).getDate().toString());
+        if (companion.getProfileImage() != null)
+            img_profile.setFill(new ImagePattern(new Image(new ByteArrayInputStream(companion.getProfileImage()))));
         return root;
     }
 

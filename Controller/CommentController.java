@@ -33,7 +33,8 @@ public class CommentController {
         comments = CommentModel.post.getComments();
         comments.sort(Comment::compareTo);
         //initialize posts array list to be shown in list view
-        prof.setFill(new ImagePattern(new Image(new ByteArrayInputStream(CommentModel.post.getPublisher().getProfileImage()))));
+        if (CommentModel.post.getPublisher().getProfileImage() != null)
+            prof.setFill(new ImagePattern(new Image(new ByteArrayInputStream(CommentModel.post.getPublisher().getProfileImage()))));
         txt_title.setText(CommentModel.post.getTitle());
         txt_name.setText(CommentModel.post.getReferencePost().getPublisher().getName());
         txt_text.setText(CommentModel.post.getText());

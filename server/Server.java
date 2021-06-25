@@ -5,61 +5,21 @@ import Model.Comment;
 import Model.Post;
 import bridges.Pack;
 import Model.User;
+import server.DB.Database;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Server {
     public static void main(String[] args) throws IOException {
-        call();
         new Server().startUpServer();
     }
-
-    public static void call() throws IOException {
-        User u1 = new User("1001", "Ali", "1234", "");
-        u1.setProfileImage(new FileInputStream("D:\\New folder\\10.jpg").readAllBytes());
-        User u2 = new User("1002", "Hasan", "1234", "");
-        u2.setProfileImage(new FileInputStream("D:\\New folder\\11.jpg").readAllBytes());
-        User u0 = new User("1003", "Shahrzad", "1234", "");
-        u0.setProfileImage(new FileInputStream("D:\\New folder\\12.jpg").readAllBytes());
-        User u3 = new User("1004", "Reza", "1234", "");
-        u3.setProfileImage(new FileInputStream("D:\\New folder\\13.jpg").readAllBytes());
-        User u5 = new User("1005", "Mahmood", "1234", "");
-        u5.setProfileImage(new FileInputStream("D:\\New folder\\14.jpg").readAllBytes());
-        u5.addFollowing(u1);
-        User u4 = new User("1006", "Goli", "1234", "");
-        u4.setProfileImage(new FileInputStream("D:\\New folder\\23.jpg").readAllBytes());
-        u4.addFollowing(u4);
-        User u7 = new User("1007", "1234", "1234", "");
-        u7.setProfileImage(new FileInputStream("D:\\New folder\\24.jpg").readAllBytes());
-        u7.addFollowing(u1);
-        u7.addFollowing(u5);
-        u1.follow(u5);
-        Repository.addUser(u0);
-        Repository.addUser(u1);
-        Repository.addUser(u2);
-        Repository.addUser(u3);
-        Repository.addUser(u4);
-        Repository.addUser(u5);
-        Repository.addUser(u7);
-        Post p1 = new Post("T1", "Ali1", Repository.getUserByUsername("1001"));
-        p1.setImage(new FileInputStream("D:\\New folder\\1.jpeg").readAllBytes());
-        p1.addComment(new Comment(u0, "Ridi ke"));
-        p1.addComment(new Comment(u0, "Madar be khata"));
-        Post p2 = new Post("T2", "Ali2", Repository.getUserByUsername("1001"));
-        p2.setImage(new FileInputStream("D:\\New folder\\4.jpeg").readAllBytes());
-        Post p3 = new Post("T3", "Mahmood", Repository.getUserByUsername("1005"));
-        p3.setImage(new FileInputStream("D:\\New folder\\3.jpeg").readAllBytes());
-        Repository.addPost(p1);
-        Repository.addPost(p2);
-        Repository.addPost(p3);
-    }
-
     public void startUpServer() throws IOException {
+
+        Database.getInstance().loadData();
+
         new LoginHandling(new ServerSocket(8080)).start();
         new SignupHandling(new ServerSocket(8081)).start();
         new ForgetHandling(new ServerSocket(8082)).start();
@@ -69,6 +29,20 @@ public class Server {
         new ProfileHandler(new ServerSocket(8086)).start();
         new SearchUsersHandler(new ServerSocket(8087)).start();
         new ChatHandler(new ServerSocket(8088)).start();
+
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    Database.getInstance().updateData();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        Timer timer = new Timer(true);
+        timer.scheduleAtFixedRate(timerTask,0,30000L);
+
     }
 }
 
@@ -406,13 +380,15 @@ class ProfileHandler extends Thread {
                 new Thread(
                         () -> {
                             try {
-                                String username = dis.readUTF();
+                                String income = dis.readUTF();
+                                String username = income.split("-")[0];
+                                String getter = income.split("-")[1];
                                 ArrayList<Post> posts = Repository.getUserPosts(username);
                                 User user = Repository.getUserByUsername(username);
                                 Pack pack = new Pack(posts,user);
                                 oos.writeObject(pack);
                                 oos.flush();
-                                System.err.printf("%s %s %s\nmessage: %s %s\ntime: %s\n", username, "get info", "target_username(TODO)", "target_username(TODO)", "profile", new Date().toString());
+                                System.err.printf("%s %s %s\nmessage: %s %s\ntime: %s\n", getter, "get info", username, username, "profile", new Date().toString());
                                 System.err.flush();
                                 System.out.println("-----------------------------------------------");
 
