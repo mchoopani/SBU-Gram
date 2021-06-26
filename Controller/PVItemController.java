@@ -111,7 +111,8 @@ public class PVItemController {
     public void delete_click() throws IOException {
         if (message instanceof DeleteMessage)
             return;
-        mediaPlayers.get(message.getId()).stop();
+        if (message instanceof AudioMessage)
+            mediaPlayers.get(message.getId()).stop();
         message.setGonnaDelete();
         PVModel.sendMessage(message, "DELETE");
     }

@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Vector;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Chat implements Serializable,Comparable<Chat> {
     private String id;
-    private static int counter = 1;
+    private static AtomicInteger counter = new AtomicInteger(1);
     private User[] pair = new User[2];
     private Vector<Message> messages = new Vector<>();
     private transient Vector<ObjectOutputStream> outputs = new Vector<>();
@@ -20,7 +21,7 @@ public class Chat implements Serializable,Comparable<Chat> {
     public Chat(User user1, User user2) {
         pair[0] = user1;
         pair[1] = user2;
-        id = "" + counter++;
+        id = "" + counter.getAndIncrement();
     }
 
     public boolean hasPV(User user) {

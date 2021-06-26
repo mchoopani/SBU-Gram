@@ -5,9 +5,10 @@ import javafx.scene.image.Image;
 import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Post implements Serializable {
-    private static long id = 1L;
+    private static AtomicLong id = new AtomicLong(1);
     private long postId;
     private Post referencePost;
     private String title;
@@ -20,7 +21,7 @@ public class Post implements Serializable {
     private Vector<Comment> comments;
 
     public Post(String title, String text,User publisher) {
-        postId = id++;
+        postId = id.getAndIncrement();
         this.title = title;
         this.text = text;
         this.publisher = publisher;

@@ -11,10 +11,10 @@ import java.util.Date;
 
 public class Database {
     private final static Database database = new Database();
-    private final String POSTS_DB = "/server/DB/Posts.bin";
-    private final String USERS_DB = "/server/DB/Users.bin";
-    private final String CHATS_DB = "/server/DB/Chats.bin";
-    private final String LOG = "/server/DB/Log.txt";
+    private final String POSTS_DB = "C:\\Users\\Macho\\Desktop\\DB\\Posts.bin";
+    private final String USERS_DB = "C:\\Users\\Macho\\Desktop\\DB\\Users.bin";
+    private final String CHATS_DB = "C:\\Users\\Macho\\Desktop\\DB\\Chats.bin";
+    private final String LOG = "C:\\Users\\Macho\\Desktop\\DB\\Log.txt";
 
     private Database() {
     }
