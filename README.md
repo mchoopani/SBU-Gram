@@ -12,6 +12,10 @@
 + Java IO to storing data
 + etc...
 
+
+Watch test run on [Aparat](https://www.aparat.com/v/7MWYI)
+
+
 ### Login And Signup
 
 ![login](https://raw.githubusercontent.com/mchoopani/SBU-Gram/master/readme-pictures/login.png)
